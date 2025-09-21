@@ -35,10 +35,10 @@ def sidebar_controls():
         style_keywords = st.multiselect(
             "Style / Design Keywords:",
             options=["Sleek", "Minimalist", "Futuristic", "Industrial", "Vintage", "Compact", "Ergonomic"],
-            default=["Sleek", "Minimalist"]
+            default=["Sleek", "Compact"]
         )
 
-        intended_use = st.text_input("Intended Use / Context:", value="For rugged outdoor hiking trips")
+        intended_use = st.text_input("Intended Use / Context: (Optional)", value="", placeholder="eg: for luxury house door")
 
     # Deep features
     with st.sidebar.expander("⚙️ Deep Features"):
