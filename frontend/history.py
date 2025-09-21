@@ -10,6 +10,7 @@ def show_history(viewer_panel, download_panel):
     Displays session history of generated 3D models.
     Allows reloading old models into the viewer.
     """
+    st.caption("Session History")
 
     if not st.session_state.history:
         st.info("Your generated models will appear here (session only).")
