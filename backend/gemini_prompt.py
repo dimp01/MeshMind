@@ -2,7 +2,7 @@ from datetime import datetime
 from backend.config import genai
 import hashlib
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 def generate_shap_e_prompt(product_type, dimensions, features, materials, style, intended_use):
     """
@@ -15,7 +15,7 @@ def generate_shap_e_prompt(product_type, dimensions, features, materials, style,
 
     prompt = f"""
     You are an expert product designer.
-    Generate a prompt for Shap-E to create a 3D model of a {product_type} with these specs:
+    Generate ONLY the prompt for Shap-E to create a 3D model of a {product_type} with these specs:
 
     - Dimensions: {dimensions}
     - Core Features: {features_text}
@@ -25,6 +25,7 @@ def generate_shap_e_prompt(product_type, dimensions, features, materials, style,
 
     The design should be realistic, clean, symmetrical, and manufacturable.
     Avoid cartoonish, distorted, or unrealistic elements.
+    Don't give any text except the prompt.
     """
     try:
         response = model.generate_content(prompt.strip())
