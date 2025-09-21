@@ -41,14 +41,15 @@ with viewer_tab:
 
     if controls["generate_button"]:
         # Build prompt using Gemini
-        prompt = generate_shap_e_prompt(
-            product_type=controls["product_name"],
-            dimensions=controls["dimensions"],
-            features=controls["features"],
-            materials=controls["material"],
-            style=controls["style"],
-            intended_use=controls["intended_use"]
-        )
+        with st.spinner("🔄 Refining words… turning chaos into clarity"):
+            prompt = generate_shap_e_prompt(
+                product_type=controls["product_name"],
+                dimensions=controls["dimensions"],
+                features=controls["features"],
+                materials=controls["material"],
+                style=controls["style"],
+                intended_use=controls["intended_use"]
+            )
 
         if not prompt:
             st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
