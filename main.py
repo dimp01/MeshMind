@@ -78,6 +78,9 @@ with viewer_tab:
                     st.session_state.history.append({
                         "prompt": prompt,
                         "file_path": file_path,
+                        "verts": verts_np.tolist(),
+                        "faces": faces_np.tolist(),
+                        "timestamp": datetime.now().strftime("%I:%M:%S %p")
                     })
 
                     # Display in viewer
