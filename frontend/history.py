@@ -36,11 +36,7 @@ def show_history(viewer_panel, download_panel):
 
             with col2:
                 if st.button("Load in Viewer", key=f"hist_view_{i}"):
-                    # Reconstruct meshes from stored verts/faces
-                    verts_np = np.asarray(item["verts"])
-                    faces_np = np.asarray(item["faces"]).astype(np.int64)
-
-                    reloaded_trimesh = trimesh.Trimesh(vertices=verts_np, faces=faces_np, process=False)
+                    reloaded_trimesh = trimesh.load(item["file_path"])
                     pv_mesh = pv.wrap(reloaded_trimesh)
 
                     with viewer_panel.container():
