@@ -2,7 +2,7 @@ from datetime import datetime
 from backend.config import genai
 import hashlib
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def generate_shap_e_prompt(product_type, dimensions, features, materials, style, intended_use):
     """
