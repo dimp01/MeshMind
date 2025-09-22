@@ -1,5 +1,5 @@
 from shap_e.diffusion.sample import sample_latents
-from shap_e.util.notebooks import create_pan_cameras, decode_latent_images, gif_widget
+from shap_e.util.notebooks import decode_latent_mesh
 from backend.config import device
 
 class TextModel:
