@@ -1,20 +1,13 @@
 from shap_e.diffusion.sample import sample_latents
-from shap_e.models.download import load_model, load_config
-from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
 from shap_e.util.notebooks import decode_latent_mesh
 from backend.config import device
 from io import BytesIO
 from PIL import Image
 import gc
 
-# Load Shap-E models globally to save time
-image_model = load_model("image300M", device=device)  # Image → 3D
-xm = load_model("transmitter", device=device)
-diffusion = diffusion_from_config(load_config("diffusion"))
-
 
 class DiffusionModel:
-    def __init__(self, image_bytes):
+    def __init__(self, image_bytes, image_model, diffusion, xm):
         # Convert bytes to PIL Image
         self.image = Image.open(BytesIO(image_bytes.getvalue())).convert("RGB")
         self.image_model = image_model
