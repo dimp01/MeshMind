@@ -49,7 +49,7 @@ class TextModel:
             model=self.model,
             diffusion=self.diffusion,
             guidance_scale=guidance_scale,
-            model_kwargs=dict(texts=[prompt] * batch_size),
+            model_kwargs=dict(texts=[prompt]),
             progress=progresss,
             clip_denoised=clip_denoised,
             use_fp16=use_fp16,
