@@ -15,14 +15,14 @@ class DiffusionModel:
         self.xm = xm
 
         # Default generation parameters
-        self.guidance_scale = 3.0
+        self.guidance_scale = 3.5
         self.use_karras = True
-        self.karras_steps = 64
+        self.karras_steps = 160
         self.sigma_min = 1e-3
-        self.sigma_max = 160
+        self.sigma_max = 80
         self.s_churn = 0
         self.clip_denoised = True
-        self.use_fp16 = True
+        self.use_fp16 = False
         self.progress = True
 
     def generate(
