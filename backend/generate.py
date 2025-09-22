@@ -40,7 +40,7 @@ class GenerateModel:
             karras_steps=self.steps,
         )
 
-        return lantents
+        return latents
 
     def diffusion(self):
         image = gen_image(self.prompt, diffusion_p)
