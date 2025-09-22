@@ -50,7 +50,7 @@ class TextModel:
             diffusion=self.diffusion,
             guidance_scale=guidance_scale,
             model_kwargs=dict(texts=[prompt]),
-            progress=progresss,
+            progress=progress,
             clip_denoised=clip_denoised,
             use_fp16=use_fp16,
             use_karras=use_karras,
