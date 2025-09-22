@@ -1,21 +1,21 @@
 import streamlit as st
 from datetime import datetime
 from backend.config import device
-from backend.shap_e_pipeline import load_shap_e_pipeline
-from backend.gemini_prompt import generate_shap_e_prompt, gen_file_name
+from backend.gemini_prompt import (
+    text_model_prompt,
+    diffusion_model_prompt,
+    gen_file_name,
+)
 from backend.mesh_utils import build_trimesh, save_mesh_obj
 from backend.file_utils import ensure_output_dir, safe_join
+from backend.generate import generate_model
 
 from frontend.ui import sidebar_controls
 from frontend.viewer import show_viewer, show_download_button
 from frontend.history import show_history
 
 # --- Streamlit Page Setup ---
-st.set_page_config(
-    page_title="AI Product Designer Pro",
-    page_icon="🤖",
-    layout="wide"
-)
+st.set_page_config(page_title="AI Product Designer Pro", page_icon="🤖", layout="wide")
 st.title("🤖 AI Product Designer Pro")
 
 # --- Initialize session state ---
@@ -24,9 +24,6 @@ if "history" not in st.session_state:
 
 # --- Sidebar controls ---
 controls = sidebar_controls()
-
-# --- Load Shap-E pipeline (cached) ---
-pipe = load_shap_e_pipeline(device)
 
 # --- Tabs for UI ---
 viewer_tab, history_tab = st.tabs(["🖼️ 3D Viewer", "📜 Generation History"])
@@ -48,7 +45,7 @@ with viewer_tab:
                 features=controls["features"],
                 materials=controls["material"],
                 style=controls["style"],
-                intended_use=controls["intended_use"]
+                intended_use=controls["intended_use"],
             )
 
         if not prompt:
@@ -56,8 +53,7 @@ with viewer_tab:
         else:
             with st.spinner("🧠 Generating 3D model... This may take a few minutes."):
                 try:
-                    # Run Shap-E
-                    outputs = pipe(
+                    generate = GenerateModel(
                         prompt,
                         guidance_scale=controls["guidance_scale"],
                         num_inference_steps=controls["steps"],
@@ -65,7 +61,10 @@ with viewer_tab:
                         output_type="mesh",
                         return_dict=True,
                     )
-                    decoder_output = outputs.images[0]
+                    if controls["is_diffusion"]:
+                        decoder_output = generate.diffusion()
+                    else:
+                        decoder_output = generate.text()
 
                     # Build mesh
                     trimesh_obj = build_trimesh(decoder_output)
@@ -77,11 +76,13 @@ with viewer_tab:
                     save_mesh_obj(decoder_output, file_path)
 
                     # Update session history
-                    st.session_state.history.append({
-                        "prompt": prompt,
-                        "file_path": file_path,
-                        "timestamp": datetime.now().strftime("%I:%M:%S %p")
-                    })
+                    st.session_state.history.append(
+                        {
+                            "prompt": prompt,
+                            "file_path": file_path,
+                            "timestamp": datetime.now().strftime("%I:%M:%S %p"),
+                        }
+                    )
 
                     # Display in viewer
                     show_viewer(trimesh_obj, viewer_panel)

@@ -1,16 +1,26 @@
 import torch
 from diffusers import StableDiffusionPipeline
+from backend.config import device
 from rembg import remove
+from io import BytesIO
 from PIL import Image
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
 
-pipe = StableDiffusionPipeline.from_pretrained(
-    "runwayml/stable-diffusion-v1-5",
-    torch_dtype=torch.float16
-).to(device)
+@st.cache_resource
+def load_diffusion_pipeline(device=device):
+    """
+    Loads and caches the Shap-E pipeline for efficiency.
+    Returns: ShapEPipeline object
+    """
+    pipe = StableDiffusionPipeline.from_pretrained(
+        "runwayml/stable-diffusion-v1-5",
+        torch_dtype=torch.float16
+    ).to(device)
+    return pipe
 
-def gen_image(prompt, file_path="temp_img.png"):
+def gen_image(prompt, pipe):
+    image_bytes = BytesIO()
     image = pipe(prompt, guidance_scale=7.5).images[0]
     image_no_bg = remove(image)
-    image_no_bg.save(file_path)
+    image_no_bg.save(image_bytes)
+    return image_bytes
