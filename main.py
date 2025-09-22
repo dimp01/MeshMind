@@ -39,7 +39,11 @@ with viewer_tab:
     if controls["generate_button"]:
         # Build prompt using Gemini
         with st.spinner("🔄 Refining words… turning chaos into clarity"):
-            prompt = generate_shap_e_prompt(
+            if controls["is_diffusion"]:
+                generate_prompt = diffusion_model_prompt
+            else:
+                generate_prompt = text_model_prompt
+            prompt = generate_prompt(
                 product_type=controls["product_name"],
                 dimensions=controls["dimensions"],
                 features=controls["features"],
