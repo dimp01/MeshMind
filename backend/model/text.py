@@ -9,14 +9,14 @@ class TextModel:
         self.xm = xm
 
         # Default generation parameters
-        self.guidance_scale = 15.0
+        self.guidance_scale = 7.5
         self.use_karras = True
         self.karras_steps = 64
         self.sigma_min = 1e-3
-        self.sigma_max = 160
+        self.sigma_max = 80
         self.s_churn = 0
         self.clip_denoised = True
-        self.use_fp16 = True
+        self.use_fp16 = False
         self.progress = True
 
     def generate(
@@ -49,7 +49,7 @@ class TextModel:
             model=self.model,
             diffusion=self.diffusion,
             guidance_scale=guidance_scale,
-            model_kwargs=dict(texts=[prompt]),
+            model_kwargs=dict(texts=[prompt] * 1),
             progress=progress,
             clip_denoised=clip_denoised,
             use_fp16=use_fp16,
