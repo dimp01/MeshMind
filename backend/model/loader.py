@@ -23,5 +23,5 @@ def gen_image(prompt, pipe):
     image_bytes = BytesIO()
     image = pipe(prompt, guidance_scale=7.5).images[0]
     image_no_bg = remove(image)
-    image_no_bg.save(image_bytes)
+    image_no_bg.save(image_bytes, format="PNG")
     return image_bytes

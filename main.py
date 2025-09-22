@@ -9,10 +9,14 @@ from backend.gemini_prompt import (
 from backend.mesh_utils import build_trimesh, save_mesh_obj
 from backend.file_utils import ensure_output_dir, safe_join
 from backend.generate import GenerateModel
+from backend.cleaner import clear_memory
 
 from frontend.ui import sidebar_controls
 from frontend.viewer import show_viewer, show_download_button
 from frontend.history import show_history
+
+# --- Clean Startup --- 
+clear_memory(verbose=True)
 
 # --- Streamlit Page Setup ---
 st.set_page_config(page_title="AI Product Designer Pro", page_icon="🤖", layout="wide")
@@ -93,8 +97,10 @@ with viewer_tab:
 
                     # Download button
                     show_download_button(file_path, download_panel)
+                    clear_memory()
 
                     # except Exception as e:
+                    # clear_memory()
                     # st.error(f"❌ An error occurred while generating the model: {e}")
 
 # ---------------------------
