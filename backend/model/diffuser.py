@@ -9,7 +9,7 @@ import gc
 class DiffusionModel:
     def __init__(self, image_bytes, image_model, diffusion, xm):
         # Convert bytes to PIL Image
-        self.image = Image.open(BytesIO(image_bytes.getvalue())).convert("RGB")
+        self.image = Image.open(BytesIO(image_bytes.getvalue()))
         self.image_model = image_model
         self.diffusion = diffusion
         self.xm = xm
