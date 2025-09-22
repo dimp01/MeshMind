@@ -33,21 +33,18 @@ class GenerateModel:
         self.return_dict = return_dict
 
     def text(self):
-        text = TextModel()
+        text = TextModel(text_model, diffusion, xm)
         latents = text.generate(
             self.prompt,
             guidance_scale=self.guidance_scale,
-            num_inference_steps=self.steps,
-            frame_size=self.frame_size,
-            output_type=self.output_type,
-            return_dict=self.return_dict,
+            karras_steps=self.steps,
         )
 
         return lantents
 
     def diffusion(self):
         image = gen_image(self.prompt, diffusion_p)
-        diffuser = DiffusionModel(image)
+        diffuser = DiffusionModel(image, image_model, diffusion, xm)
         latents = diffuser.generate(self.guidance_scale)
         return latents
 
