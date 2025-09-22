@@ -4,6 +4,7 @@ from backend.config import device
 from rembg import remove
 from io import BytesIO
 from PIL import Image
+import streamlit as st
 
 
 @st.cache_resource
