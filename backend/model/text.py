@@ -21,7 +21,7 @@ class TextModel:
 
     def generate(
         self,
-        prompt
+        prompt,
         guidance_scale=None,
         karras_steps=None,
         sigma_min=None,
