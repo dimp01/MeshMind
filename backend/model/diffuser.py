@@ -1,7 +1,7 @@
 from shap_e.diffusion.sample import sample_latents
 from shap_e.models.download import load_model, load_config
 from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
-from shap_e.util.notebooks import decode_latent_mesh, render_mesh
+from shap_e.util.notebooks import decode_latent_mesh
 from backend.config import device
 from io import BytesIO
 from PIL import Image
@@ -78,7 +78,3 @@ class DiffusionModel:
 
         mesh = decode_latent_mesh(self.xm, latents[0])
         return mesh
-
-    def render_preview(self, mesh, views=3):
-        """Returns a list of PIL images for preview"""
-        return render_mesh(mesh, views=views)
