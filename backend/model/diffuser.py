@@ -25,7 +25,7 @@ class DiffusionModel:
         self,
         guidance_scale
     ):
-        batch = [(image_input, None)]
+        batch = [(self.image, None)]
         latents = sample_latents(
             self.image_model,
             self.diffusion,
