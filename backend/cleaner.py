@@ -20,6 +20,6 @@ def clear_memory(verbose=True):
     if verbose:
         if torch.cuda.is_available():
             vram = torch.cuda.memory_allocated() / 1024**2
-            st.write(f"📈 GPU VRAM allocated: {vram:.2f} MB")
+            st.toast(f"GPU VRAM allocated: {vram:.2f} MB", icon="📈")
         else:
-            st.write("⚠ Cleared memory. GPU not available.")
+            st.warning("⚠ Cleared memory. GPU not available.")
