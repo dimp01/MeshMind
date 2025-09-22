@@ -8,7 +8,7 @@ from backend.gemini_prompt import (
 )
 from backend.mesh_utils import build_trimesh, save_mesh_obj
 from backend.file_utils import ensure_output_dir, safe_join
-from backend.generate import generate_model
+from backend.generate import GenerateModel
 
 from frontend.ui import sidebar_controls
 from frontend.viewer import show_viewer, show_download_button
