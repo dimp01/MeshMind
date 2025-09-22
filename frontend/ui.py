@@ -10,9 +10,11 @@ def sidebar_controls():
     product_name = st.sidebar.text_input("Product Name:", value="A flower vase")
 
     features = st.sidebar.text_area(
-        "Key Features (comma or newline separated):",
+        "Key Features (comma separated):",
         value="chinese, detailed"
     )
+
+    diffusion = st.sidebar.checkbox("Use Diffusion", value=True)
     features_list = [f.strip() for f in features.replace("\n", ",").split(",") if f.strip()]
 
     # Advanced settings
@@ -74,5 +76,6 @@ def sidebar_controls():
         "guidance_scale": guidance_scale,
         "steps": num_inference_steps,
         "frame_size": render_frame_size,
+        "is_diffusion": diffusion,
         "generate_button": generate_button
     }
