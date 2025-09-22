@@ -56,7 +56,7 @@ with viewer_tab:
             st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
         else:
             with st.spinner("🧠 Generating 3D model... This may take a few minutes."):
-                try:
+                    # try:
                     generate = GenerateModel(
                         prompt,
                         guidance_scale=controls["guidance_scale"],
@@ -94,8 +94,8 @@ with viewer_tab:
                     # Download button
                     show_download_button(file_path, download_panel)
 
-                except Exception as e:
-                    st.error(f"❌ An error occurred while generating the model: {e}")
+                    # except Exception as e:
+                    # st.error(f"❌ An error occurred while generating the model: {e}")
 
 # ---------------------------
 # History Tab
