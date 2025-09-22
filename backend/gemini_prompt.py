@@ -43,7 +43,8 @@ def diffusion_model_prompt(product_type, dimensions, features, materials, style,
         features_text = features
 
     prompt = f"""
-    You are a world-class product designer. Create a hyper-realistic 4K image of a {product_type} with the following specifications:
+    You are a world-class product designer.
+    Give ONLY a 1 line prompt to ceate a hyper-realistic 4K image of a {product_type} with the following specifications:
     
     - Dimensions: {dimensions}
     - Core Features: {features_text}
@@ -53,7 +54,8 @@ def diffusion_model_prompt(product_type, dimensions, features, materials, style,
     
     The image should be photorealistic, clean, and symmetrical, suitable for presentation or marketing.
     Avoid cartoonish, low-resolution, or distorted elements.
-    Focus entirely on the object with accurate details; do not include text or logos.
+    Focus entirely on the object with accurate details.
+    Don't give any text except the prompt.
     """
     try:
         response = model.generate_content(prompt.strip())
