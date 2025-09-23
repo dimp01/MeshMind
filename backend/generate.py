@@ -1,6 +1,6 @@
 from backend.model.loader import get_models, load_diffusion_pipeline
 from backend.model.text import TextModel
-from backend.model.diffuser import DiffusionModel, gen_image
+from backend.model.diffuser import DiffusionModel
 from backend.config import device
 
 image_model, text_model, xm, diffusion = get_models(device)
@@ -35,8 +35,8 @@ class GenerateModel:
         return latents
 
     def diffusion(self):
-        image = gen_image(self.prompt, diffusion_p)
-        diffuser = DiffusionModel(image, image_model, diffusion, xm)
+        diffuser = DiffusionModel(image_model, diffusion, xm)
+        image = diffuser.gen_image(self.prompt, diffusion_p)
         latents = diffuser.generate(
             guidance_scale=self.guidance_scale,
             sigma_max=self.frame_size,
