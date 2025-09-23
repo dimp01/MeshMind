@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from datetime import datetime
 from backend.config import device
@@ -16,6 +17,7 @@ from frontend.viewer import show_viewer, show_download_button
 from frontend.history import show_history
 
 # --- Clean Startup --- 
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 clear_memory(verbose=True)
 
 # --- Streamlit Page Setup ---
