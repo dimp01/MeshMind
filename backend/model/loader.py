@@ -1,10 +1,9 @@
 import torch
-from diffusers import StableDiffusionPipeline
-from backend.config import device
-from rembg import remove
-from io import BytesIO
-from PIL import Image
 import streamlit as st
+from diffusers import StableDiffusionPipeline
+from shap_e.models.download import load_model, load_config
+from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
+from backend.config import device
 
 
 @st.cache_resource
@@ -19,9 +18,10 @@ def load_diffusion_pipeline(device=device):
     ).to(device)
     return pipe
 
-def gen_image(prompt, pipe):
-    image_bytes = BytesIO()
-    image = pipe(prompt, guidance_scale=7.5).images[0]
-    image_no_bg = remove(image)
-    image_no_bg.save(image_bytes, format="PNG")
-    return image_bytes
+@st.cache_resource
+def get_models(device):
+    image_model = load_model("image300M", device=device)
+    text_model = load_model("text300M", device=device)
+    xm = load_model("transmitter", device=device)
+    diffusion = diffusion_from_config(load_config("diffusion"))
+    return image_model, text_model, xm, diffusion
