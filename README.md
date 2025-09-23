@@ -1,6 +1,6 @@
 # MeshMind 🤖 AI-Powered 3D Product Designer
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb){:target="_blank"}
+<a target="_blank" href="https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb)">![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
 MeshMind is an advanced AI system for **automated 3D product design**.  
 It leverages custom-trained diffusion and generative pipelines to generate realistic, manufacturable 3D models from structured product prompts.  
