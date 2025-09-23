@@ -20,7 +20,7 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
     prompt = f"""
     You are a prompt expert.
     Generate ONLY the prompt for Shap-E by improving this prompt.
-    {message}
+    \"{message}\"
     Don't give any text except the prompt.
     """
     try:
@@ -29,7 +29,7 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
     except Exception as e:
         return f"An error occurred in Gemini: {e}"
 
-def diffusion_model_prompt(product_type, dimensions, features, materials, style, intended_use):
+def diffusion_model_prompt(product_name, dimensions, style, colors):
     """
     Generates a Shap-E compatible prompt using Gemini.
     """
@@ -39,20 +39,21 @@ def diffusion_model_prompt(product_type, dimensions, features, materials, style,
         features_text = features
 
     prompt = f"""
-    You are a world-class product designer.
-    Give ONLY a 1 line prompt to ceate a hyper-realistic 4K image of a {product_type} with the following specifications:
-    
-    - Dimensions: {dimensions}
-    - Core Features: {features_text}
-    - Materials/Finish: {materials}
+    You are a prompt expert.
+    Generate ONLY the prompt for Image generation of a product by using this info.
+
+    - Model: Runaway
+    - Product: {product_name}
+    - Dimension: {dimensions}
     - Style/Design: {style}
-    - Intended Use: {intended_use}
-    
+    - Colors: {colors}
+
     The image should be photorealistic, clean, and symmetrical, suitable for presentation or marketing.
     Avoid cartoonish, low-resolution, or distorted elements.
     Focus entirely on the object with accurate details.
     Don't give any text except the prompt.
     """
+
     try:
         response = model.generate_content(prompt.strip())
         return response.text.strip()
