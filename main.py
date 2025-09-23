@@ -41,7 +41,7 @@ with viewer_tab:
     download_panel = st.empty()
 
     if controls["generate_button"]:
-        st.balloons()
+        st.snow()
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
             if controls["is_diffusion"]:
@@ -57,7 +57,7 @@ with viewer_tab:
                 style=controls["style"],
                 intended_use=controls["intended_use"],
             )
-            st.write("A prompt was generated.")
+            st.write(" - A prompt was generated.")
 
             if not prompt:
                 st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
@@ -72,7 +72,6 @@ with viewer_tab:
                         output_type="mesh",
                         return_dict=True,
                     )
-                    st.write("3D model was generated.")
                     if controls["is_diffusion"]:
                         decoder_output = generate.diffusion()
                     else:
@@ -86,6 +85,7 @@ with viewer_tab:
                     file_name = gen_file_name(prompt)
                     file_path = safe_join(output_dir, file_name)
                     save_mesh_obj(decoder_output, file_path)
+                    st.write(" - 3D model was generated.")
     
                     # Update session history
                     st.session_state.history.append(
