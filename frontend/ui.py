@@ -14,7 +14,7 @@ def sidebar_controls():
         value="chinese, detailed"
     )
 
-    diffusion = st.sidebar.checkbox("Use Diffusion", value=True)
+    diffusion = st.sidebar.checkbox("Use Diffusion", value=False, help="Improves model quality (slower the process of generation)")
     features_list = [f.strip() for f in features.replace("\n", ",").split(",") if f.strip()]
 
     # Advanced settings
