@@ -43,7 +43,6 @@ with viewer_tab:
     download_panel = st.empty()
 
     if controls["generate_button"]:
-        st.snow()
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
             if controls["is_diffusion"]:
