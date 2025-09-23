@@ -9,11 +9,11 @@ class TextModel:
         self.xm = xm
 
         # Default generation parameters
-        self.guidance_scale = 7.5
+        self.guidance_scale = 15.5
         self.use_karras = True
         self.karras_steps = 64
         self.sigma_min = 1e-3
-        self.sigma_max = 80
+        self.sigma_max = 256
         self.s_churn = 0
         self.clip_denoised = True
         self.use_fp16 = False
