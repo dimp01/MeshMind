@@ -1,15 +1,15 @@
 from shap_e.diffusion.sample import sample_latents
 from shap_e.util.notebooks import decode_latent_mesh
 from backend.config import device
+from rembg import remove
 from io import BytesIO
 from PIL import Image
-import gc
 
 
 class DiffusionModel:
     def __init__(self, image_bytes, image_model, diffusion, xm):
         # Convert bytes to PIL Image
-        self.image = Image.open(BytesIO(image_bytes.getvalue()))
+        # self.image = Image.open(BytesIO(self.image_bytes.getvalue()))
         self.image_model = image_model
         self.diffusion = diffusion
         self.xm = xm
@@ -71,3 +71,10 @@ class DiffusionModel:
 
         mesh = decode_latent_mesh(self.xm, latents[0])
         return mesh
+        
+    def gen_image(self, prompt, pipe):
+        self.image = BytesIO()
+        image_s = pipe(prompt, guidance_scale=7.5).images[0]
+        image_no_bg = remove(image_s)
+        image_no_bg.save(self.image, format="PNG")
+
