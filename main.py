@@ -41,6 +41,7 @@ with viewer_tab:
     download_panel = st.empty()
 
     if controls["generate_button"]:
+        st.balloons()
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
             if controls["is_diffusion"]:
@@ -58,53 +59,53 @@ with viewer_tab:
             )
             st.write("A prompt was generated.")
 
-        if not prompt:
-            st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
-        else:
-            st.write("🧠 Generating 3D model... This may take a few minutes.")
-            try:
-                generate = GenerateModel(
-                    prompt,
-                    guidance_scale=controls["guidance_scale"],
-                    num_inference_steps=controls["steps"],
-                    frame_size=controls["frame_size"],
-                    output_type="mesh",
-                    return_dict=True,
-                )
-                st.write("3D model was generated.")
-                if controls["is_diffusion"]:
-                    decoder_output = generate.diffusion()
-                else:
-                    decoder_output = generate.text()
-
-                # Build mesh
-                trimesh_obj = build_trimesh(decoder_output)
-
-                # File management
-                output_dir = ensure_output_dir()
-                file_name = gen_file_name(prompt)
-                file_path = safe_join(output_dir, file_name)
-                save_mesh_obj(decoder_output, file_path)
-
-                # Update session history
-                st.session_state.history.append(
-                    {
-                        "prompt": prompt,
-                        "file_path": file_path,
-                        "timestamp": datetime.now().strftime("%I:%M:%S %p"),
-                    }
-                )
-
-                status.update(
-                    label="✅ Generation complete!", state="complete", expanded=False
-                )
-
-                # Display in viewer
-                show_viewer(trimesh_obj, viewer_panel)
-
-                # Download button
-                show_download_button(file_path, download_panel)
-                clear_memory()
+            if not prompt:
+                st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
+            else:
+                st.write("🧠 Generating 3D model... This may take a few minutes.")
+                try:
+                    generate = GenerateModel(
+                        prompt,
+                        guidance_scale=controls["guidance_scale"],
+                        num_inference_steps=controls["steps"],
+                        frame_size=controls["frame_size"],
+                        output_type="mesh",
+                        return_dict=True,
+                    )
+                    st.write("3D model was generated.")
+                    if controls["is_diffusion"]:
+                        decoder_output = generate.diffusion()
+                    else:
+                        decoder_output = generate.text()
+    
+                    # Build mesh
+                    trimesh_obj = build_trimesh(decoder_output)
+    
+                    # File management
+                    output_dir = ensure_output_dir()
+                    file_name = gen_file_name(prompt)
+                    file_path = safe_join(output_dir, file_name)
+                    save_mesh_obj(decoder_output, file_path)
+    
+                    # Update session history
+                    st.session_state.history.append(
+                        {
+                            "prompt": prompt,
+                            "file_path": file_path,
+                            "timestamp": datetime.now().strftime("%I:%M:%S %p"),
+                        }
+                    )
+    
+                    status.update(
+                        label="✅ Generation complete!", state="complete", expanded=False
+                    )
+    
+                    # Display in viewer
+                    show_viewer(trimesh_obj, viewer_panel)
+    
+                    # Download button
+                    show_download_button(file_path, download_panel)
+                    clear_memory()
 
             except Exception as e:
                 clear_memory()
