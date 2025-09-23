@@ -61,7 +61,7 @@ with viewer_tab:
         if not prompt:
             st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
         else:
-            st.write("🧠 Generating 3D model... This may take a few minutes."):
+            st.write("🧠 Generating 3D model... This may take a few minutes.")
             try:
                 generate = GenerateModel(
                     prompt,
