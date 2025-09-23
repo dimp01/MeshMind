@@ -1,4 +1,3 @@
-
 from shap_e.models.download import load_model, load_config
 from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
 
@@ -38,6 +37,7 @@ class GenerateModel:
             self.prompt,
             guidance_scale=self.guidance_scale,
             karras_steps=self.steps,
+            sigma_max=self.frame_size
         )
 
         return latents
@@ -45,6 +45,10 @@ class GenerateModel:
     def diffusion(self):
         image = gen_image(self.prompt, diffusion_p)
         diffuser = DiffusionModel(image, image_model, diffusion, xm)
-        latents = diffuser.generate(self.guidance_scale)
+        latents = diffuser.generate(
+            guidance_scale=self.guidance_scale,
+            sigma_max=self.frame_size,
+            karras_steps=self.steps
+        )
         return latents
 
