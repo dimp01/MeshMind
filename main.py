@@ -107,9 +107,9 @@ with viewer_tab:
                     show_download_button(file_path, download_panel)
                     clear_memory()
 
-            except Exception as e:
-                clear_memory()
-                st.error(f"❌ An error occurred while generating the model: {e}")
+                except Exception as e:
+                    clear_memory()
+                    st.error(f"❌ An error occurred while generating the model: {e}")
 
 # ---------------------------
 # History Tab
