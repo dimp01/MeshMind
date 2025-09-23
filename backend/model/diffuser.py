@@ -7,7 +7,7 @@ from PIL import Image
 
 
 class DiffusionModel:
-    def __init__(self, image_bytes, image_model, diffusion, xm):
+    def __init__(self, image_model, diffusion, xm):
         # Convert bytes to PIL Image
         # self.image = Image.open(BytesIO(self.image_bytes.getvalue()))
         self.image_model = image_model
