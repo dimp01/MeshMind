@@ -42,11 +42,12 @@ with viewer_tab:
 
     if controls["generate_button"]:
         # Build prompt using Gemini
-        with st.spinner("🔄 Refining words… turning chaos into clarity"):
+        with st.status("✨ Evaluating your request....", expanded=True) as status:
             if controls["is_diffusion"]:
                 generate_prompt = diffusion_model_prompt
             else:
                 generate_prompt = text_model_prompt
+            st.write("🔄 Refining words… turning chaos into clarity")
             prompt = generate_prompt(
                 product_type=controls["product_name"],
                 dimensions=controls["dimensions"],
@@ -55,53 +56,59 @@ with viewer_tab:
                 style=controls["style"],
                 intended_use=controls["intended_use"],
             )
+            st.write("A prompt was generated.")
 
         if not prompt:
             st.warning("⚠️ Gemini did not return a valid prompt. Try again.")
         else:
-            with st.spinner("🧠 Generating 3D model... This may take a few minutes."):
-                try:
-                    generate = GenerateModel(
-                        prompt,
-                        guidance_scale=controls["guidance_scale"],
-                        num_inference_steps=controls["steps"],
-                        frame_size=controls["frame_size"],
-                        output_type="mesh",
-                        return_dict=True,
-                    )
-                    if controls["is_diffusion"]:
-                        decoder_output = generate.diffusion()
-                    else:
-                        decoder_output = generate.text()
+            st.write("🧠 Generating 3D model... This may take a few minutes."):
+            try:
+                generate = GenerateModel(
+                    prompt,
+                    guidance_scale=controls["guidance_scale"],
+                    num_inference_steps=controls["steps"],
+                    frame_size=controls["frame_size"],
+                    output_type="mesh",
+                    return_dict=True,
+                )
+                st.write("3D model was generated.")
+                if controls["is_diffusion"]:
+                    decoder_output = generate.diffusion()
+                else:
+                    decoder_output = generate.text()
 
-                    # Build mesh
-                    trimesh_obj = build_trimesh(decoder_output)
+                # Build mesh
+                trimesh_obj = build_trimesh(decoder_output)
 
-                    # File management
-                    output_dir = ensure_output_dir()
-                    file_name = gen_file_name(prompt)
-                    file_path = safe_join(output_dir, file_name)
-                    save_mesh_obj(decoder_output, file_path)
+                # File management
+                output_dir = ensure_output_dir()
+                file_name = gen_file_name(prompt)
+                file_path = safe_join(output_dir, file_name)
+                save_mesh_obj(decoder_output, file_path)
 
-                    # Update session history
-                    st.session_state.history.append(
-                        {
-                            "prompt": prompt,
-                            "file_path": file_path,
-                            "timestamp": datetime.now().strftime("%I:%M:%S %p"),
-                        }
-                    )
+                # Update session history
+                st.session_state.history.append(
+                    {
+                        "prompt": prompt,
+                        "file_path": file_path,
+                        "timestamp": datetime.now().strftime("%I:%M:%S %p"),
+                    }
+                )
 
-                    # Display in viewer
-                    show_viewer(trimesh_obj, viewer_panel)
+                status.update(
+                    label="✅ Generation complete!", state="complete", expanded=False
+                )
 
-                    # Download button
-                    show_download_button(file_path, download_panel)
-                    clear_memory()
+                # Display in viewer
+                show_viewer(trimesh_obj, viewer_panel)
 
-                except Exception as e:
-                    clear_memory()
-                    st.error(f"❌ An error occurred while generating the model: {e}")
+                # Download button
+                show_download_button(file_path, download_panel)
+                clear_memory()
+
+            except Exception as e:
+                clear_memory()
+                st.error(f"❌ An error occurred while generating the model: {e}")
 
 # ---------------------------
 # History Tab
