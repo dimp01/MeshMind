@@ -1,6 +1,6 @@
 # MeshMind 🤖 AI-Powered 3D Product Designer
 
-<a target="_blank" href="https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb">![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+<a href="https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb" target="_blank">![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
 MeshMind is an advanced AI system for **automated 3D product design**.  
 It leverages custom-trained diffusion and generative pipelines to generate realistic, manufacturable 3D models from structured product prompts.  
@@ -29,7 +29,7 @@ Designed for rapid prototyping and aesthetic optimization, MeshMind allows users
 ## 🖥️ Running in Google Colab (GPU)
 
 1. Open [Google Colab](https://colab.research.google.com/).  
-2. Open the notebook <a target="_blank" href="https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb">`run_code.ipynb`</a>.  
+2. Open the notebook <a href="https://colab.research.google.com/github/dimp01/MeshMind/blob/main/run_code.ipynb" target="_blank" rel="noopener noreferrer">`run_code.ipynb`</a>.  
 3. **Enable GPU:**  
    `Runtime → Change runtime type → Hardware accelerator → GPU (T4)`  
 4. Run all cells. The notebook handles:
