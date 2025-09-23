@@ -9,7 +9,6 @@ from PIL import Image
 class DiffusionModel:
     def __init__(self, image_model, diffusion, xm):
         # Convert bytes to PIL Image
-        # self.image = Image.open(BytesIO(self.image_bytes.getvalue()))
         self.image_model = image_model
         self.diffusion = diffusion
         self.xm = xm
@@ -73,8 +72,8 @@ class DiffusionModel:
         return mesh
         
     def gen_image(self, prompt, pipe):
-        self.image = BytesIO()
+        image_b = BytesIO()
         image_s = pipe(prompt, guidance_scale=7.5).images[0]
         image_no_bg = remove(image_s)
-        image_no_bg.save(self.image, format="PNG")
-
+        image_no_bg.save(image_b, format="PNG")
+        self.image = Image.open(BytesIO(self.image_b.getvalue()))
