@@ -8,10 +8,11 @@ def sidebar_controls():
     st.sidebar.header("⚙️ Generation Controls")
 
     product_name = st.sidebar.text_input("Product Name:", value="A flower vase")
+    colors = st.sidebar.text_input("Colors:", value="purple and white")
 
     features = st.sidebar.text_area(
         "Key Features (comma separated):",
-        value="chinese, detailed"
+        value="realistic, detailed"
     )
 
     diffusion = st.sidebar.checkbox("Use Diffusion", value=False, help="Improves model quality (slower the process of generation)")
@@ -77,5 +78,6 @@ def sidebar_controls():
         "steps": num_inference_steps,
         "frame_size": render_frame_size,
         "is_diffusion": diffusion,
+        "colors": colors,
         "generate_button": generate_button
     }
