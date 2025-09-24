@@ -68,11 +68,11 @@ def gen_file_name(prompt: str) -> str:
     Generates a short, safe filename for saving 3D objects.
     """
     try:
-        response = model.generate_content(f"Give a 2 word short filename for: {prompt}")
+        response = model.generate_content(f"Give only a 2 word short filename for (no other text just 2 word reponse): {prompt}")
         safe_prompt = "".join(c for c in response.text if c.isalnum() or c in " _-").rstrip()
         # Add hash to avoid duplicates
         short_hash = hashlib.md5(prompt.encode()).hexdigest()[:6]
-        filename = f"{safe_prompt}_{short_hash}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
+        filename = f"{safe_prompt[]}_{short_hash}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
         return filename
     except Exception as e:
         return f"error_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
