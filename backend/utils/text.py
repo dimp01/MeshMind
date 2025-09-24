@@ -30,8 +30,7 @@ class TextModel:
         use_karras=None,
         clip_denoised=None,
         use_fp16=None,
-        progress=None,
-        generator=None
+        progress=None
     ):
         # Update parameters if provided
         guidance_scale = guidance_scale or self.guidance_scale
@@ -58,8 +57,7 @@ class TextModel:
             karras_steps=karras_steps,
             sigma_min=sigma_min,
             sigma_max=sigma_max,
-            s_churn=s_churn,
-            generator=generator
+            s_churn=s_churn
         )
 
         mesh = decode_latent_mesh(self.xm, latents[0])
