@@ -4,7 +4,7 @@ import hashlib
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-def text_model_prompt(product_name, dimensions, features, materials, style, intended_use):
+def text_model_prompt(product_name, dimensions, features, materials, style, intended_use, colors):
     """
     Generates a Shap-E compatible prompt using Gemini.
     """
@@ -14,7 +14,9 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
         features_text = features
 
     message = f"""
-    Make a 3D model of a {product_name}, color: {color}, features: [{feature_text}], material: {materials}, style: {style}, purpose: {intended_use}
+    Make a 3D model of a {product_name}, color: {colors}, 
+    features: [{feature_text}], material: {materials},
+    style: {style}, purpose: {intended_use}, dimensions: {dimensions}
     """
 
     prompt = f"""
