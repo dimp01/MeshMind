@@ -1,6 +1,6 @@
-from backend.model.loader import get_models, load_diffusion_pipeline
-from backend.model.text import TextModel
-from backend.model.diffuser import DiffusionModel
+from backend.utils.loader import get_models, load_diffusion_pipeline
+from backend.utils.text import TextModel
+from backend.utils.diffuser import DiffusionModel
 from backend.config import device
 
 image_model, text_model, xm, diffusion = get_models(device)
