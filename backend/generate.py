@@ -2,10 +2,21 @@ from backend.utils.loader import get_models, load_diffusion_pipeline
 from backend.utils.text import TextModel
 from backend.utils.diffuser import DiffusionModel
 from backend.config import device
+
+import random
+import numpy as np
 import torch, time
 
 image_model, text_model, xm, diffusion = get_models(device)
 diffusion_p = load_diffusion_pipeline(device)
+
+seed = int(time.time()) % (2**32 - 1)
+torch.manual_seed(seed)
+torch.cuda.manual_seed_all(seed)
+np.random.seed(seed)
+random.seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 
 class GenerateModel:
@@ -24,17 +35,14 @@ class GenerateModel:
         self.frame_size = frame_size
         self.output_type = output_type
         self.return_dict = return_dict
-        self.seed = int(time.time()) % (2**32 - 1)
 
     def text(self):
         text = TextModel(text_model, diffusion, xm)
-        generator = torch.Generator(device=device).manual_seed(self.seed)
         latents = text.generate(
             self.prompt,
             guidance_scale=self.guidance_scale,
             karras_steps=self.steps,
-            sigma_max=self.frame_size,
-            generator=generator
+            sigma_max=self.frame_size
         )
 
         return latents
@@ -42,12 +50,10 @@ class GenerateModel:
     def diffusion(self):
         diffuser = DiffusionModel(image_model, diffusion, xm)
         image = diffuser.gen_image(self.prompt, diffusion_p)
-        generator = torch.Generator(device=device).manual_seed(self.seed)
         latents = diffuser.generate(
             guidance_scale=self.guidance_scale,
             sigma_max=self.frame_size,
-            karras_steps=self.steps,
-            generator=generator
+            karras_steps=self.steps
         )
         return latents
 
