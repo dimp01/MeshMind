@@ -56,7 +56,6 @@ class TextModel:
             use_fp16=use_fp16,
             use_karras=use_karras,
             karras_steps=karras_steps,
-            n_steps=karras_steps,
             sigma_min=sigma_min,
             sigma_max=sigma_max,
             s_churn=s_churn,
