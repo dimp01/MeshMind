@@ -2,9 +2,11 @@ from backend.utils.loader import get_models, load_diffusion_pipeline
 from backend.utils.text import TextModel
 from backend.utils.diffuser import DiffusionModel
 from backend.config import device
+import torch
 
 image_model, text_model, xm, diffusion = get_models(device)
 diffusion_p = load_diffusion_pipeline(device)
+
 
 class GenerateModel:
     def __init__(
@@ -22,14 +24,17 @@ class GenerateModel:
         self.frame_size = frame_size
         self.output_type = output_type
         self.return_dict = return_dict
+        self.seed = int(time.time()) % (2**32 - 1)
 
     def text(self):
         text = TextModel(text_model, diffusion, xm)
+        generator = torch.Generator(device=device).manual_seed(self.seed)
         latents = text.generate(
             self.prompt,
             guidance_scale=self.guidance_scale,
             karras_steps=self.steps,
-            sigma_max=self.frame_size
+            sigma_max=self.frame_size,
+            generator=generator
         )
 
         return latents
@@ -37,10 +42,12 @@ class GenerateModel:
     def diffusion(self):
         diffuser = DiffusionModel(image_model, diffusion, xm)
         image = diffuser.gen_image(self.prompt, diffusion_p)
+        generator = torch.Generator(device=device).manual_seed(self.seed)
         latents = diffuser.generate(
             guidance_scale=self.guidance_scale,
             sigma_max=self.frame_size,
-            karras_steps=self.steps
+            karras_steps=self.steps,
+            generator=generator
         )
         return latents
 
