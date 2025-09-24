@@ -16,7 +16,7 @@ def show_history(viewer_panel, download_panel):
         st.info("Your generated models will appear here (session only).")
     else:
         for i, item in enumerate(reversed(st.session_state.history)):
-            st.markdown("---")
+            st.markdown("---") if i!=0 else 0
             col1, col2 = st.columns([3, 1])
 
             with col1:
