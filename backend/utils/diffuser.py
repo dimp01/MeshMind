@@ -14,11 +14,11 @@ class DiffusionModel:
         self.xm = xm
 
         # Default generation parameters
-        self.guidance_scale = 2.5
+        self.guidance_scale = 3.5
         self.use_karras = True
-        self.karras_steps = 50
+        self.karras_steps = 64
         self.sigma_min = 1e-3
-        self.sigma_max = 128
+        self.sigma_max = 80
         self.s_churn = 0
         self.clip_denoised = True
         self.use_fp16 = False
@@ -62,12 +62,13 @@ class DiffusionModel:
             clip_denoised=clip_denoised,
             use_fp16=use_fp16,
             device=device,
+            n_steps=karras_steps,
             use_karras=use_karras,
             karras_steps=karras_steps,
             sigma_min=sigma_min,
             sigma_max=sigma_max,
             s_churn=s_churn,
-            octree_depth=256,
+            octree_depth=8,
             generator=generator
         )
 
