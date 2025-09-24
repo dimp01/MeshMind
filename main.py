@@ -52,6 +52,7 @@ with viewer_tab:
                     dimensions=controls["dimensions"],
                     style=controls["style"],
                     colors=controls["colors"],
+                    features=controls["features"]
                 )
             else:
                 prompt = text_model_prompt(
