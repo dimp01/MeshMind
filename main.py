@@ -45,19 +45,24 @@ with viewer_tab:
     if controls["generate_button"]:
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
-            if controls["is_diffusion"]:
-                generate_prompt = diffusion_model_prompt
-            else:
-                generate_prompt = text_model_prompt
             st.write("🔄 Refining words… turning chaos into clarity")
-            prompt = generate_prompt(
-                product_type=controls["product_name"],
-                dimensions=controls["dimensions"],
-                features=controls["features"],
-                materials=controls["material"],
-                style=controls["style"],
-                intended_use=controls["intended_use"],
-            )
+            if controls["is_diffusion"]:
+                prompt = diffusion_model_prompt(
+                    product_name=controls["product_name"],
+                    dimensions=controls["dimensions"],
+                    style=controls["style"],
+                    colors=controls["colors"],
+                )
+            else:
+                prompt = text_model_prompt(
+                    product_name=controls["product_name"],
+                    dimensions=controls["dimensions"],
+                    features=controls["features"],
+                    materials=controls["material"],
+                    style=controls["style"],
+                    intended_use=controls["intended_use"],
+                    colors=controls["colors"]
+                )
             st.write(" - A prompt was generated.")
 
             if not prompt:
