@@ -76,4 +76,4 @@ class DiffusionModel:
         image_s = pipe(prompt, guidance_scale=7.5).images[0]
         image_no_bg = remove(image_s)
         image_no_bg.save(image_b, format="PNG")
-        self.image = Image.open(BytesIO(self.image_b.getvalue()))
+        self.image = Image.open(BytesIO(image_b.getvalue()))
