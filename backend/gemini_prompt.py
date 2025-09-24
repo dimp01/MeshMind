@@ -15,7 +15,7 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
 
     message = f"""
     Make a 3D model of a {product_name}, color: {colors}, 
-    features: [{feature_text}], material: {materials},
+    features: [{features_text}], material: {materials},
     style: {style}, purpose: {intended_use}, dimensions: {dimensions}
     """
 
@@ -31,7 +31,7 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
     except Exception as e:
         return f"An error occurred in Gemini: {e}"
 
-def diffusion_model_prompt(product_name, dimensions, style, colors):
+def diffusion_model_prompt(product_name, dimensions, style, colors, features):
     """
     Generates a Shap-E compatible prompt using Gemini.
     """
@@ -49,6 +49,7 @@ def diffusion_model_prompt(product_name, dimensions, style, colors):
     - Dimension: {dimensions}
     - Style/Design: {style}
     - Colors: {colors}
+    - Important features: {features_text}
 
     The image should be photorealistic, clean, and symmetrical, suitable for presentation or marketing.
     Avoid cartoonish, low-resolution, or distorted elements.
