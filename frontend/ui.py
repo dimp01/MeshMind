@@ -59,7 +59,7 @@ def sidebar_controls():
 
         render_frame_size = st.slider(
             "Render Frame Size",
-            min_value=64, max_value=256, value=256, step=32,
+            min_value=64, max_value=256, value=160, step=32,
             help="Higher values = more detail but more GPU memory"
         )
 
