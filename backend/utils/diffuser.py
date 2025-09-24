@@ -14,11 +14,11 @@ class DiffusionModel:
         self.xm = xm
 
         # Default generation parameters
-        self.guidance_scale = 3.5
+        self.guidance_scale = 2.5
         self.use_karras = True
-        self.karras_steps = 160
+        self.karras_steps = 50
         self.sigma_min = 1e-3
-        self.sigma_max = 80
+        self.sigma_max = 128
         self.s_churn = 0
         self.clip_denoised = True
         self.use_fp16 = False
@@ -35,6 +35,7 @@ class DiffusionModel:
         clip_denoised=None,
         use_fp16=None,
         progress=None,
+        generator=None
     ):
         # Update parameters if provided
         guidance_scale = guidance_scale or self.guidance_scale
@@ -66,6 +67,8 @@ class DiffusionModel:
             sigma_min=sigma_min,
             sigma_max=sigma_max,
             s_churn=s_churn,
+            octree_depth=256,
+            generator=generator
         )
 
         mesh = decode_latent_mesh(self.xm, latents[0])
