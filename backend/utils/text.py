@@ -59,7 +59,6 @@ class TextModel:
             sigma_min=sigma_min,
             sigma_max=sigma_max,
             s_churn=s_churn,
-            octree_depth=8,
             generator=generator
         )
 
