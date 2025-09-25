@@ -11,7 +11,7 @@ def sidebar_controls():
         section[data-testid="stSidebar"] {
             min-width: 20% !important;
             max-width: 50% !important;
-            width: 25%
+            width: 25% !important
         }
     
         [data-testid="stSidebarUserContent"] {
@@ -84,7 +84,7 @@ def sidebar_controls():
             )
 
         chosen_format = st.selectbox(
-            label="Choose a file format",
+            "Choose a file format",
             label_visibility="collapsed",
             options=['obj', 'ply', 'stl', 'glb'],
             index=0
