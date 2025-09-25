@@ -43,7 +43,7 @@ def diffusion_model_prompt(product_name, dimensions, style, colors, features):
     You are a prompt expert.
     Generate ONLY the prompt for Image generation of a product by using this info.
 
-    - Model: Runaway
+    - Model: runway/stable-diffusion
     - Product: {product_name}
     - Dimension: {dimensions}
     - Style/Design: {style}
@@ -63,7 +63,7 @@ def diffusion_model_prompt(product_name, dimensions, style, colors, features):
     except Exception as e:
         return f"An error occurred in Gemini: {e}"
 
-def gen_file_name(prompt: str) -> str:
+def gen_file_name(prompt: str, format: str) -> str:
     """
     Generates a short, safe filename for saving 3D objects.
     """
@@ -72,7 +72,7 @@ def gen_file_name(prompt: str) -> str:
         safe_prompt = "".join(c for c in response.text if c.isalnum() or c in " _-").rstrip()
         # Add hash to avoid duplicates
         short_hash = hashlib.md5(prompt.encode()).hexdigest()[:6]
-        filename = f"{safe_prompt}_{short_hash}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
+        filename = f"{safe_prompt}_{short_hash}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.{format}"
         return filename
     except Exception as e:
         return f"error_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
