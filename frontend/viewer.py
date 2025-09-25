@@ -24,7 +24,7 @@ def show_download_button(file_path, container, format):
         file_bytes = f.read()
     with container.container():
         st.download_button(
-            label="⬇️ Download .{format} file",
+            label=f"⬇️ Download .{format} file",
             data=file_bytes,
             file_name=file_path.split("/")[-1],
             mime="application/octet-stream"
