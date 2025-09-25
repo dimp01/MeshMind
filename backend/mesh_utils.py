@@ -33,6 +33,8 @@ def save_mesh_as(decoder_output, file_path, format):
     else:
         mesh = decoder_output.tri_mesh()
         if format.lower() in ['glb', 'gltf']:
+            if not hasattr(mesh, 'metadata'):
+                mesh.metadata = {}
             mesh = trimesh.Scene(mesh)
         with open(file_path, "wb") as f:
             export_mesh(mesh, f, file_type=format)
