@@ -1,6 +1,6 @@
-import numpy as np
-import trimesh
 from diffusers.utils import export_to_obj
+import trimesh.exchange.export as exporter
+import numpy as np
 
 def build_trimesh(decoder_output):
     """
@@ -32,5 +32,6 @@ def save_mesh_as(decoder_output, file_path, format):
     else:
         mesh = decoder_output.tri_mesh()
         with open(file_path, "wb") as f:
-            mesh.export(f, file_type=format)
+            f.write(exporter.export_mesh(mesh, file_type=format))
+            f.close()
     return file_path
