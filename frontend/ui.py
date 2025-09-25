@@ -1,27 +1,28 @@
 import streamlit as st
 
-st.markdown("""
-<style>
-    section[data-testid="stSidebar"] {
-        width: 400px !important;
-    }
-
-    [data-testid="stSidebarUserContent"] {
-        overflow-y: hidden;
-    }
-
-    [data-testid="stForm"] {
-        border: none;
-        padding: 1rem 1rem 0 1rem;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 def sidebar_controls():
     """
     Sidebar UI form for user inputs and generation settings.
     The form submission triggers the generation process.
     """
+    st.markdown("""
+    <style>
+        section[data-testid="stSidebar"] {
+            width: 400px !important;
+        }
+    
+        [data-testid="stSidebarUserContent"] {
+            overflow-y: hidden;
+        }
+    
+        [data-testid="stForm"] {
+            border: none;
+            padding: 1rem 1rem 0 1rem;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.sidebar.header("⚙️ Generation Controls")
 
     with st.sidebar.form(key='generation_form'):
