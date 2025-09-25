@@ -1,4 +1,5 @@
 import os
+import traceback
 import streamlit as st
 from datetime import datetime
 from backend.config import device
@@ -118,6 +119,7 @@ with viewer_tab:
                 except Exception as e:
                     clear_memory()
                     st.error(f"❌ An error occurred while generating the model: {e}")
+                    traceback.print_exc()
 
 # ---------------------------
 # History Tab
