@@ -91,8 +91,8 @@ with viewer_tab:
                     # File management
                     output_dir = ensure_output_dir()
                     format = controls["format"]
-                    file_name = gen_file_name(prompt)
-                    file_path = safe_join(output_dir, file_name, format)
+                    file_name = gen_file_name(prompt, format)
+                    file_path = safe_join(output_dir, file_name)
                     save_mesh_as(decoder_output, file_path, format)
     
                     status.update(
