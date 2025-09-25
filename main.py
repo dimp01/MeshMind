@@ -88,15 +88,6 @@ with viewer_tab:
                     trimesh_obj = build_trimesh(decoder_output)
                     st.write(" - 3D model was generated.")
     
-                    # Update session history
-                    st.session_state.history.append(
-                        {
-                            "prompt": prompt,
-                            "file_path": file_path,
-                            "timestamp": datetime.now().strftime("%I:%M:%S %p"),
-                        }
-                    )
-    
                     status.update(
                         label="✅ Generation complete!", state="complete", expanded=False
                     )
@@ -119,6 +110,15 @@ with viewer_tab:
                     show_download_button(file_path, download_panel, format)
                     save_mesh_as(decoder_output, file_path, format)
                     clear_memory()
+
+                    # Update session history
+                    st.session_state.history.append(
+                        {
+                            "prompt": prompt,
+                            "file_path": file_path,
+                            "timestamp": datetime.now().strftime("%I:%M:%S %p"),
+                        }
+                    )
 
                 except Exception as e:
                     clear_memory()
