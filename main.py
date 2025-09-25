@@ -1,5 +1,8 @@
 import os
+import time
+import random
 import traceback
+import numpy as np
 import streamlit as st
 from datetime import datetime
 from backend.config import device
@@ -44,6 +47,15 @@ with viewer_tab:
     download_panel = st.empty()
 
     if controls["generate_button"]:
+        if controls["seed"] == "random":
+            seed = int(time.time()) % (2**32 - 1)
+        else:
+            seed = controls["seed"]
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        np.random.seed(seed)
+        random.seed(seed)
+        
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
             st.write("🔄 Refining words… turning chaos into clarity")
