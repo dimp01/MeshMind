@@ -2,8 +2,6 @@ from datetime import datetime
 from backend.config import genai
 import hashlib
 
-model = genai.GenerativeModel("gemini-2.5-flash")
-
 def text_model_prompt(product_name, dimensions, features, materials, style, intended_use, colors):
     """
     Generates a Shap-E compatible prompt using Gemini.
@@ -26,6 +24,7 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
     Don't give any text except the prompt.
     """
     try:
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt.strip())
         return response.text.strip()
     except Exception as e:
@@ -58,6 +57,7 @@ def diffusion_model_prompt(product_name, dimensions, style, colors, features):
     """
 
     try:
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt.strip())
         return response.text.strip()
     except Exception as e:
