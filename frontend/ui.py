@@ -9,7 +9,9 @@ def sidebar_controls():
     st.markdown("""
     <style>
         section[data-testid="stSidebar"] {
-            min-width: 30% !important;
+            min-width: 20% !important;
+            max-width: 50% !important;
+            width: 25%
         }
     
         [data-testid="stSidebarUserContent"] {
@@ -18,7 +20,7 @@ def sidebar_controls():
     
         [data-testid="stForm"] {
             border: none;
-            padding: 1rem 1rem 0 1rem;
+            padding: .5rem .5rem 0 .5rem;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -107,6 +109,6 @@ def sidebar_controls():
         "frame_size": render_frame_size,
         "is_diffusion": diffusion,
         "colors": colors,
-        "format": choosen_format,
+        "format": chosen_format,
         "generate_button": generate_button
     }
