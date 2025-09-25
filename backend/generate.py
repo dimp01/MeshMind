@@ -2,20 +2,11 @@ from backend.utils.loader import get_models, load_diffusion_pipeline
 from backend.utils.text import TextModel
 from backend.utils.diffuser import DiffusionModel
 from backend.config import device
-
-import random
-import numpy as np
-import torch, time
+import torch
 
 image_model, text_model, xm, diffusion = get_models(device)
 diffusion_p = load_diffusion_pipeline(device)
 
-# seed = int(time.time()) % (2**32 - 1)
-seed = 1758743251
-torch.manual_seed(seed)
-torch.cuda.manual_seed_all(seed)
-np.random.seed(seed)
-random.seed(seed)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
