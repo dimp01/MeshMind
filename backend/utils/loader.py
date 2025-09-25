@@ -20,7 +20,7 @@ def load_diffusion_pipeline(device=device):
         pipe = StableDiffusionPipeline.from_pretrained(
             SAVE_PATH,
             torch_dtype=torch.float16
-        ).to("cuda")
+        ).to(device)
         print("Pipeline loaded successfully! Ready for inference.")
     else:
         print(f"❌ Model not found at: {SAVE_PATH}. Downloading model....")
