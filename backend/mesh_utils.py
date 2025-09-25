@@ -23,9 +23,14 @@ def build_trimesh(decoder_output):
 
     return trimesh.Trimesh(vertices=verts_np, faces=faces_np.astype(np.int64), process=False)
 
-def save_mesh_obj(decoder_output, file_path):
+def save_mesh_as(decoder_output, file_path, format):
     """
     Saves a Shap-E MeshDecoderOutput to .obj file.
     """
-    export_to_obj(decoder_output, file_path)
+    if format == "obj":
+        export_to_obj(decoder_output, file_path)
+    else:
+        mesh = decoder_output.tri_mesh()
+        with open(file_path, "wb") as f:
+            mesh.export(f, file_type=format)
     return file_path
