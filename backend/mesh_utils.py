@@ -1,5 +1,6 @@
 from diffusers.utils import export_to_obj
 from trimesh.exchange.export import export_mesh
+import numpy as np
 import trimesh
 
 def build_trimesh(decoder_output):
