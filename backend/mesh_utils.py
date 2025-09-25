@@ -32,6 +32,8 @@ def save_mesh_as(decoder_output, file_path, format):
         export_to_obj(decoder_output, file_path)
     else:
         mesh = decoder_output.tri_mesh()
+        if format.lower() in ['glb', 'gltf']:
+            mesh = trimesh.Scene(mesh)
         with open(file_path, "wb") as f:
             export_mesh(mesh, f, file_type=format)
     return file_path
