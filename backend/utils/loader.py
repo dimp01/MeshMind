@@ -1,4 +1,4 @@
-import torch
+import torch, os
 import streamlit as st
 from diffusers import StableDiffusionPipeline
 from shap_e.models.download import load_model, load_config
