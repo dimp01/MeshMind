@@ -11,7 +11,13 @@ def show_viewer(trimesh_obj, container):
     with container.container():
         pv_mesh = pv.wrap(trimesh_obj)
         plotter = pv.Plotter(window_size=[600, 600], border=False)
-        plotter.add_mesh(pv_mesh, show_edges=True)
+        plotter.add_mesh(
+            pv_mesh,
+            scalars=trimesh_obj.visual.vertex_colors[:, :3],
+            rgb=True,
+            show_edges=False
+        )
+        # plotter.add_mesh(pv_mesh, show_edges=True)
         plotter.view_isometric()
         plotter.background_color = "black"
         stpyvista(plotter, key="main_viewer")
