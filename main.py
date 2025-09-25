@@ -7,7 +7,7 @@ from backend.gemini_prompt import (
     diffusion_model_prompt,
     gen_file_name,
 )
-from backend.mesh_utils import build_trimesh, save_mesh_obj
+from backend.mesh_utils import build_trimesh, save_mesh_as
 from backend.file_utils import ensure_output_dir, safe_join
 from backend.generate import GenerateModel
 from backend.cleaner import clear_memory
@@ -86,12 +86,6 @@ with viewer_tab:
     
                     # Build mesh
                     trimesh_obj = build_trimesh(decoder_output)
-    
-                    # File management
-                    output_dir = ensure_output_dir()
-                    file_name = gen_file_name(prompt)
-                    file_path = safe_join(output_dir, file_name)
-                    save_mesh_obj(decoder_output, file_path)
                     st.write(" - 3D model was generated.")
     
                     # Update session history
@@ -111,7 +105,19 @@ with viewer_tab:
                     show_viewer(trimesh_obj, viewer_panel)
     
                     # Download button
-                    show_download_button(file_path, download_panel)
+                    with download_panel.container():
+                        chosen_format = st.selectbox(
+                            label="Choose a file format",
+                            label_visibility="collapsed",
+                            options=['obj', 'ply', 'stl', 'glb'],
+                            index=0
+                        )
+                    # File management
+                    output_dir = ensure_output_dir()
+                    file_name = gen_file_name(prompt)
+                    file_path = safe_join(output_dir, file_name, format)
+                    show_download_button(file_path, download_panel, format)
+                    save_mesh_as(decoder_output, file_path, format)
                     clear_memory()
 
                 except Exception as e:
