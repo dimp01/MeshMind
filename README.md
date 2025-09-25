@@ -62,7 +62,7 @@ MeshMind was built to **address these challenges in an academic context**:
 
 ## 🚀 Features
 
-- **Text & Image Input:** Generate models from product descriptions or sketches.  
+- **Refined Input:** Refines prompt from product descriptions for better quality of generation.  
 - **Material & Color Options:** Plastic, metal, wood, etc. with customizable colors.  
 - **Live 3D Viewer:** Rotate, zoom, inspect geometry, toggle wireframe and material previews.  
 - **Downloadable Formats:** Export `.obj` or `.stl` for prototyping and refinement.  
