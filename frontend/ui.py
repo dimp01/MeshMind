@@ -47,7 +47,7 @@ def sidebar_controls():
             form_factor = st.radio(
                 "Form Factor:",
                 options=["Cylindrical", "Rectangular", "Ergonomic", "Custom Shape"],
-                index=0
+                index=2
             )
 
             material = st.selectbox(
@@ -75,13 +75,13 @@ def sidebar_controls():
             
             guidance_scale = st.slider(
                 "Guidance Scale (Prompt Adherence)",
-                min_value=1.0, max_value=30.0, value=15.5, step=0.5,
+                min_value=1.0, max_value=30.0, value=15.0, step=0.5,
                 help="Higher values = stricter adherence to prompt"
             )
 
             num_inference_steps = st.slider(
                 "Inference Steps (Detail vs. Speed)",
-                min_value=10, max_value=100, value=64, step=1,
+                min_value=10, max_value=100, value=65, step=1,
                 help="More steps = more detail but slower"
             )
 
