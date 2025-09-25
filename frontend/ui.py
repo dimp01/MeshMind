@@ -83,7 +83,7 @@ def sidebar_controls():
                 help="Higher values = more detail but more GPU memory"
             )
 
-        format_col1, format_col2 = st.columns([1, 2], gap="small")
+        format_col1, format_col2 = st.columns([1, 1], gap="small")
         
         with format_col1:
             # Display the label in the first column
@@ -92,7 +92,8 @@ def sidebar_controls():
         with format_col2:
             # Display the selectbox in the second column, with its own label hidden
             chosen_format = st.selectbox(
-                "Choose a file format inline",
+                "Choose a file format",
+                label_visibility="collapsed",
                 options=['obj', 'ply', 'stl', 'glb'],
                 index=0
             )
