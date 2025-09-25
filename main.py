@@ -87,29 +87,17 @@ with viewer_tab:
                     # Build mesh
                     trimesh_obj = build_trimesh(decoder_output)
                     st.write(" - 3D model was generated.")
+
+                    # File management
+                    output_dir = ensure_output_dir()
+                    format = controls["format"]
+                    file_name = gen_file_name(prompt)
+                    file_path = safe_join(output_dir, file_name, format)
+                    save_mesh_as(decoder_output, file_path, format)
     
                     status.update(
                         label="✅ Generation complete!", state="complete", expanded=False
                     )
-    
-                    # Display in viewer
-                    show_viewer(trimesh_obj, viewer_panel)
-    
-                    # Download button
-                    with download_panel.container():
-                        chosen_format = st.selectbox(
-                            label="Choose a file format",
-                            label_visibility="collapsed",
-                            options=['obj', 'ply', 'stl', 'glb'],
-                            index=0
-                        )
-                    # File management
-                    output_dir = ensure_output_dir()
-                    file_name = gen_file_name(prompt)
-                    file_path = safe_join(output_dir, file_name, format)
-                    show_download_button(file_path, download_panel, format)
-                    save_mesh_as(decoder_output, file_path, format)
-                    clear_memory()
 
                     # Update session history
                     st.session_state.history.append(
@@ -119,6 +107,13 @@ with viewer_tab:
                             "timestamp": datetime.now().strftime("%I:%M:%S %p"),
                         }
                     )
+    
+                    # Display in viewer
+                    show_viewer(trimesh_obj, viewer_panel)
+    
+                    # Download button
+                    show_download_button(file_path, download_panel, format)
+                    clear_memory()
 
                 except Exception as e:
                     clear_memory()
