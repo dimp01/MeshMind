@@ -65,6 +65,14 @@ def sidebar_controls():
 
         # Deep features
         with st.expander("⚙️ Deep Features"):
+            seeding = st.slider(
+                "Random Seeding",
+                min_value=1, max_value=2**32 - 1,  # A standard range for seeds
+                value=1758743251,
+                step=1,
+                help="Controls randomness. Save the seed to recreate results; change it for variations."
+            )
+            
             guidance_scale = st.slider(
                 "Guidance Scale (Prompt Adherence)",
                 min_value=1.0, max_value=30.0, value=15.5, step=0.5,
@@ -116,6 +124,7 @@ def sidebar_controls():
         "steps": num_inference_steps,
         "frame_size": render_frame_size,
         "is_diffusion": diffusion,
+        "seed": seeding,
         "colors": colors,
         "format": chosen_format,
         "generate_button": generate_button
