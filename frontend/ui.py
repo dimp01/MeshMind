@@ -83,12 +83,20 @@ def sidebar_controls():
                 help="Higher values = more detail but more GPU memory"
             )
 
-        chosen_format = st.selectbox(
-            "Choose a file format",
-            label_visibility="collapsed",
-            options=['obj', 'ply', 'stl', 'glb'],
-            index=0
-        )
+        format_col1, format_col2 = st.columns([1, 2], gap="small")
+        
+        with format_col1:
+            # Display the label in the first column
+            st.markdown("Format:")
+            
+        with format_col2:
+            # Display the selectbox in the second column, with its own label hidden
+            chosen_format_inline = st.selectbox(
+                "Choose a file format inline",
+                label_visibility="collapsed",
+                options=['obj', 'ply', 'stl', 'glb'],
+                index=0
+            )
         # The submit button for the form
         generate_button = st.form_submit_button("Generate 3D Model", type="primary")
 
