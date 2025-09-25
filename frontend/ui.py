@@ -87,13 +87,12 @@ def sidebar_controls():
         
         with format_col1:
             # Display the label in the first column
-            st.markdown("Format:")
+            st.markdown("Output Format:")
             
         with format_col2:
             # Display the selectbox in the second column, with its own label hidden
-            chosen_format_inline = st.selectbox(
+            chosen_format = st.selectbox(
                 "Choose a file format inline",
-                label_visibility="collapsed",
                 options=['obj', 'ply', 'stl', 'glb'],
                 index=0
             )
