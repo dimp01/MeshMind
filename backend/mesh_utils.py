@@ -31,11 +31,12 @@ def save_mesh_as(decoder_output, file_path, format):
     if format == "obj":
         export_to_obj(decoder_output, file_path)
     else:
-        mesh = decoder_output.tri_mesh()
-        if format.lower() in ['glb', 'gltf']:
-            if not hasattr(mesh, 'metadata'):
-                mesh.metadata = {}
-            mesh = trimesh.Scene(mesh)
+        mesh = build_trimesh(decoder_output)
+        # if format.lower() in ['glb', 'gltf']:
+        #     if not hasattr(mesh, 'metadata'):
+        #         mesh.metadata = {}
+        #     mesh = trimesh.Scene(mesh)
         with open(file_path, "wb") as f:
-            export_mesh(mesh, f, file_type=format)
+            # export_mesh(mesh, f, file_type=format)
+            mesh.export(f, file_type=format)
     return file_path
