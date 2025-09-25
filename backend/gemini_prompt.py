@@ -71,6 +71,7 @@ def gen_file_name(prompt: str, format: str) -> str:
     Generates a short, safe filename for saving 3D objects.
     """
     try:
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(f"Give only a 2 word short filename for (no other text just 2 word reponse): {prompt}")
         safe_prompt = "".join(c for c in response.text if c.isalnum() or c in " _-").rstrip()
         # Add hash to avoid duplicates
