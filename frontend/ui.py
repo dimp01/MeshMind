@@ -9,7 +9,7 @@ def sidebar_controls():
     st.markdown("""
     <style>
         section[data-testid="stSidebar"] {
-            width: 400px !important;
+            min-width: 30% !important;
         }
     
         [data-testid="stSidebarUserContent"] {
@@ -29,7 +29,7 @@ def sidebar_controls():
         product_name = st.text_input("Product Name:", value="A flower vase")
         colors = st.text_input("Colors:", value="purple and white")
 
-        features = st.text_area(
+        features = st.text_input(
             "Key Features (comma separated):",
             value="realistic, detailed"
         )
@@ -81,6 +81,12 @@ def sidebar_controls():
                 help="Higher values = more detail but more GPU memory"
             )
 
+        chosen_format = st.selectbox(
+            label="Choose a file format",
+            label_visibility="collapsed",
+            options=['obj', 'ply', 'stl', 'glb'],
+            index=0
+        )
         # The submit button for the form
         generate_button = st.form_submit_button("Generate 3D Model", type="primary")
 
@@ -101,5 +107,6 @@ def sidebar_controls():
         "frame_size": render_frame_size,
         "is_diffusion": diffusion,
         "colors": colors,
+        "format": choosen_format,
         "generate_button": generate_button
     }
