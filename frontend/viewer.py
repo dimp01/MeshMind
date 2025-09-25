@@ -16,7 +16,7 @@ def show_viewer(trimesh_obj, container):
         plotter.background_color = "black"
         stpyvista(plotter, key="main_viewer")
 
-def show_download_button(file_path, container):
+def show_download_button(file_path, container, format):
     """
     Displays a download button for the generated OBJ file.
     """
@@ -24,7 +24,7 @@ def show_download_button(file_path, container):
         file_bytes = f.read()
     with container.container():
         st.download_button(
-            label="⬇️ Download .obj file",
+            label="⬇️ Download .{format} file",
             data=file_bytes,
             file_name=file_path.split("/")[-1],
             mime="application/octet-stream"
