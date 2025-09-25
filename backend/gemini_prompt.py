@@ -1,5 +1,6 @@
 from datetime import datetime
 from backend.config import genai
+import streamlit as st
 import hashlib
 
 def text_model_prompt(product_name, dimensions, features, materials, style, intended_use, colors):
@@ -28,7 +29,8 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
         response = model.generate_content(prompt.strip())
         return response.text.strip()
     except Exception as e:
-        return f"An error occurred in Gemini: {e}"
+        st.toast(f"An error occurred in Gemini: {e}", icon="⚠")
+        return message
 
 def diffusion_model_prompt(product_name, dimensions, style, colors, features):
     """
@@ -61,7 +63,8 @@ def diffusion_model_prompt(product_name, dimensions, style, colors, features):
         response = model.generate_content(prompt.strip())
         return response.text.strip()
     except Exception as e:
-        return f"An error occurred in Gemini: {e}"
+        st.toast(f"An error occurred in Gemini: {e}", icon="⚠")
+        return f"{product_name}, {features_text}, {colors}, isolated minimal"
 
 def gen_file_name(prompt: str, format: str) -> str:
     """
@@ -75,4 +78,7 @@ def gen_file_name(prompt: str, format: str) -> str:
         filename = f"{safe_prompt}_{short_hash}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.{format}"
         return filename
     except Exception as e:
-        return f"error_{datetime.now().strftime('%Y%m%d_%H%M%S')}.obj"
+        st.toast("Error while generating the file name. Retrying...", icon="⚠")
+        gen_file_name(prompt, format)
+        raise RuntimeError("Uable to generate name for file.")
+            
