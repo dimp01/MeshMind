@@ -20,6 +20,7 @@ def show_history(viewer_panel, download_panel):
             col1, col2, col3 = st.columns([1, 2, 1])
             
             with col1:
+                reloaded_trimesh = trimesh.load(item["file_path"])
                 pv_mesh = pv.wrap(reloaded_trimesh)
                 plotter = pv.Plotter(off_screen=True, window_size=[150, 120])
                 plotter.add_mesh(pv_mesh, show_edges=True)
