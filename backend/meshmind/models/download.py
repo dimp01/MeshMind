@@ -37,6 +37,18 @@ URL_HASHES = {
     "https://drive.google.com/uc?export=download&id=1d8MU3eTM9MHTrbabJ3l-qzJyZzwR5ztL": "efcb2cd7ee545b2d27223979d41857802448143990572a42645cd09c2942ed57",
 }
 
+FILENAME = {
+    "https://drive.google.com/uc?export=download&id=1dTMLDq-ktjoBDJaSKLMRbR-HVVck932q": "transmitter.pt",
+    "https://openaipublic.azureedge.net/main/shap-e/vector_decoder.pt": "vector_decoder.pt",
+    "https://drive.google.com/uc?export=download&id=1CIpHfXVaHRm9TYfbSNUJfx-sS_QVLnwC": "text_cond.pt",
+    "https://drive.google.com/uc?export=download&id=17a3do_emwJZp-E2DWMybQbvJa1rLM7Jh": "image_cond.pt",
+    "https://drive.google.com/uc?export=download&id=1wH1nGRSsmg8U72RaPXAtS4Fl-IVbnYcL": "transmitter_config.yaml",
+    "https://openaipublic.azureedge.net/main/shap-e/vector_decoder_config.yaml": "vector_decoder_config.yaml",
+    "https://drive.google.com/uc?export=download&id=1i3lTsjazz9IkE9Jb7NH8WsiIMFCpzKyU": "text_cond_config.yaml",
+    "https://drive.google.com/uc?export=download&id=15alU5pN1OYEVL59s8SYT0TXVaZvlzpVR": "image_cond_config.yaml",
+    "https://drive.google.com/uc?export=download&id=1d8MU3eTM9MHTrbabJ3l-qzJyZzwR5ztL": "diffusion_config.yaml",
+}
+
 
 @lru_cache()
 def default_cache_dir() -> str:
@@ -49,10 +61,8 @@ def fetch_file_cached(
     expected_hash = URL_HASHES.get(url)
     if expected_hash is None:
         raise ValueError(f"No expected hash found for URL: {url}")
-
-    file_info = gdown.get_url_info(url)
-    filename = file_info['name']
-    size = int(file_info.get('size', 0))
+    
+    filename = FILENAME.get(url)
 
     if cache_dir is None:
         cache_dir = default_cache_dir()
@@ -68,9 +78,11 @@ def fetch_file_cached(
         if "drive.google.com" in url:
             gdown.download(url, output=tmp_path, quiet=not progress)
         else:
+            r = requests.get(url, stream=True)
+            size = int(r.headers.get("content-length", "0"))
             pbar = tqdm(total=size, unit="iB", unit_scale=True, unit_divisor=1024) if progress else None
             try:
-                with requests.get(url, stream=True) as r, open(tmp_path, "wb") as f:
+                with open(tmp_path, "wb") as f:
                     r.raise_for_status()
                     for chunk in r.iter_content(chunk_size=chunk_size):
                         if chunk:
