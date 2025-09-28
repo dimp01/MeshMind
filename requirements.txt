@@ -30,6 +30,7 @@ tqdm
 matplotlib
 scikit-image
 numpy
+gdown
 blobfile
 
 # External Git repo
