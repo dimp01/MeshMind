@@ -1,5 +1,5 @@
-from shap_e.diffusion.sample import sample_latents
-from shap_e.util.notebooks import decode_latent_mesh
+from ..meshmind.diffusion.sample import sample_latents
+from ..meshmind.util.notebooks import decode_latent_mesh
 from backend.config import device
 
 class TextModel:

@@ -1,8 +1,8 @@
 import torch, os
 import streamlit as st
 from diffusers import StableDiffusionPipeline
-from shap_e.models.download import load_model, load_config
-from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
+from ..meshmind.models.download import load_model, load_config
+from ..meshmind.diffusion.gaussian_diffusion import diffusion_from_config
 from backend.config import device
 from pathlib import Path
 
