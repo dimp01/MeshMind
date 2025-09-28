@@ -7,7 +7,7 @@ import numpy as np
 import torch.nn as nn
 from torch import torch
 
-from meshmind.util.collections import AttrDict
+from ...util.collections import AttrDict
 
 
 def flatten_param_shapes(param_shapes: Dict[str, Tuple[int]]):

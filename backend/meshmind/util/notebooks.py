@@ -7,10 +7,10 @@ import numpy as np
 import torch
 from PIL import Image
 
-from meshmind.models.nn.camera import DifferentiableCameraBatch, DifferentiableProjectiveCamera
-from meshmind.models.transmitter.base import Transmitter, VectorDecoder
-from meshmind.rendering.torch_mesh import TorchMesh
-from meshmind.util.collections import AttrDict
+from ..models.nn.camera import DifferentiableCameraBatch, DifferentiableProjectiveCamera
+from ..models.transmitter.base import Transmitter, VectorDecoder
+from ..rendering.torch_mesh import TorchMesh
+from ..util.collections import AttrDict
 
 
 def create_pan_cameras(size: int, device: torch.device) -> DifferentiableCameraBatch:

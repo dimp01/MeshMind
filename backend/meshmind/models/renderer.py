@@ -4,14 +4,14 @@ from typing import Callable, Dict, List, Optional, Tuple
 import numpy as np
 import torch
 
-from meshmind.models.nn.camera import (
+from ..models.nn.camera import (
     DifferentiableCamera,
     DifferentiableProjectiveCamera,
     get_image_coords,
     projective_camera_frame,
 )
-from meshmind.models.nn.meta import MetaModule
-from meshmind.util.collections import AttrDict
+from ..models.nn.meta import MetaModule
+from ..util.collections import AttrDict
 
 
 class Renderer(MetaModule):

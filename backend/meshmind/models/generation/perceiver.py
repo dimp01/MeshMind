@@ -4,7 +4,7 @@ from typing import Optional
 import torch
 import torch.nn as nn
 
-from meshmind.models.nn.checkpoint import checkpoint
+from ...models.nn.checkpoint import checkpoint
 
 from .transformer import MLP, Transformer, init_linear
 from .util import timestep_embedding

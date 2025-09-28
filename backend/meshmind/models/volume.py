@@ -4,8 +4,8 @@ from typing import Dict, Optional, Tuple
 
 import torch
 
-from meshmind.models.nn.meta import MetaModule
-from meshmind.models.nn.utils import ArrayType, safe_divide, to_torch
+from ..models.nn.meta import MetaModule
+from ..models.nn.utils import ArrayType, safe_divide, to_torch
 
 
 @dataclass

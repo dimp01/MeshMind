@@ -4,7 +4,7 @@ from typing import Iterable, Optional
 import numpy as np
 import torch
 
-import meshmind.rendering.mesh
+from ..mesh import TriMesh
 
 from ._utils import cross_product, normalize
 
@@ -71,7 +71,7 @@ class TriMesh:
         return normalize(cross_product(v1, v2))
 
     @classmethod
-    def from_numpy(cls, x: meshmind.rendering.mesh.TriMesh) -> "TriMesh":
+    def from_numpy(cls, x: TriMesh) -> "TriMesh":
         vertex_colors = None
         if all(ch in x.vertex_channels for ch in "RGB"):
             vertex_colors = torch.from_numpy(

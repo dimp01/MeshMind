@@ -6,7 +6,7 @@ from typing import BinaryIO, List, Tuple
 import numpy as np
 from PIL import Image
 
-from meshmind.rendering.view_data import Camera, ProjectiveCamera, ViewData
+from ..view_data import Camera, ProjectiveCamera, ViewData
 
 
 class BlenderViewData(ViewData):

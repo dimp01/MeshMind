@@ -3,7 +3,7 @@ from typing import BinaryIO, Optional
 
 import numpy as np
 
-from meshmind.util.io import buffered_writer
+from ..util.io import buffered_writer
 
 
 def write_ply(

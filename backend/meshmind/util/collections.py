@@ -6,12 +6,6 @@ K = TypeVar('K')
 V = TypeVar('V')
 
 class AttrDict(OrderedDict[K, V], Generic[K, V]):
-    """
-    An attribute dictionary that automatically handles nested keys joined by "/".
-
-    Originally copied from: https://stackoverflow.com/questions/3031219/recursively-access-dict-via-attributes-as-well-as-index-access
-    """
-
     MARKER = object()
 
     # pylint: disable=super-init-not-called

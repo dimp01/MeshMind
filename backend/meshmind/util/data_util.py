@@ -7,13 +7,13 @@ import numpy as np
 import torch
 from PIL import Image
 
-from meshmind.rendering.blender.render import render_mesh, render_model
-from meshmind.rendering.blender.view_data import BlenderViewData
-from meshmind.rendering.mesh import TriMesh
-from meshmind.rendering.point_cloud import PointCloud
-from meshmind.rendering.view_data import ViewData
-from meshmind.util.collections import AttrDict
-from meshmind.util.image_util import center_crop, get_alpha, remove_alpha, resize
+from ..rendering.blender.render import render_mesh, render_model
+from ..rendering.blender.view_data import BlenderViewData
+from ..rendering.mesh import TriMesh
+from ..rendering.point_cloud import PointCloud
+from ..rendering.view_data import ViewData
+from ..util.collections import AttrDict
+from ..util.image_util import center_crop, get_alpha, remove_alpha, resize
 
 
 def load_or_create_multimodal_batch(

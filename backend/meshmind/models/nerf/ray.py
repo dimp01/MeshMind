@@ -5,9 +5,9 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import torch
 
-from meshmind.models.nn.utils import sample_pmf
-from meshmind.models.volume import Volume, VolumeRange
-from meshmind.util.collections import AttrDict
+from ...models.nn.utils import sample_pmf
+from ...models.volume import Volume, VolumeRange
+from ...util.collections import AttrDict
 
 from .model import NeRFModel, Query
 

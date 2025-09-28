@@ -30,7 +30,7 @@ from collections import OrderedDict
 
 import torch.nn as nn
 
-from meshmind.util.collections import AttrDict
+from ...util.collections import AttrDict
 
 __all__ = [
     "MetaModule",

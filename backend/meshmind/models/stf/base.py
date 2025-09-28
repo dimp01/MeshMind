@@ -3,9 +3,9 @@ from typing import Any, Dict, Optional
 
 import torch
 
-from meshmind.models.query import Query
-from meshmind.models.renderer import append_tensor
-from meshmind.util.collections import AttrDict
+from ...models.query import Query
+from ...models.renderer import append_tensor
+from ...util.collections import AttrDict
 
 
 class Model(ABC):

@@ -4,12 +4,12 @@ from typing import Any, Dict, Optional, Tuple
 import torch
 import torch.nn as nn
 
-from meshmind.models.nn.checkpoint import checkpoint
-from meshmind.models.nn.encoding import encode_position, maybe_encode_direction
-from meshmind.models.nn.meta import MetaModule, subdict
-from meshmind.models.nn.ops import MetaLinear, get_act, mlp_init
-from meshmind.models.query import Query
-from meshmind.util.collections import AttrDict
+from ...models.nn.checkpoint import checkpoint
+from ...models.nn.encoding import encode_position, maybe_encode_direction
+from ...models.nn.meta import MetaModule, subdict
+from ...models.nn.ops import MetaLinear, get_act, mlp_init
+from ...models.query import Query
+from ...util.collections import AttrDict
 
 from .base import Model
 

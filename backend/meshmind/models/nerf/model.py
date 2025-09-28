@@ -6,13 +6,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from meshmind.models.nn.checkpoint import checkpoint
-from meshmind.models.nn.encoding import encode_position, spherical_harmonics_basis
-from meshmind.models.nn.meta import MetaModule, subdict
-from meshmind.models.nn.ops import MLP, MetaMLP, get_act, mlp_init, zero_init
-from meshmind.models.nn.utils import ArrayType
-from meshmind.models.query import Query
-from meshmind.util.collections import AttrDict
+from ...models.nn.checkpoint import checkpoint
+from ...models.nn.encoding import encode_position, spherical_harmonics_basis
+from ...models.nn.meta import MetaModule, subdict
+from ...models.nn.ops import MLP, MetaMLP, get_act, mlp_init, zero_init
+from ...models.nn.utils import ArrayType
+from ...models.query import Query
+from ...util.collections import AttrDict
 
 
 class NeRFModel(ABC):

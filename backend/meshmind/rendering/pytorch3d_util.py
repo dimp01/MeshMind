@@ -17,7 +17,7 @@ from pytorch3d.renderer import (
 from pytorch3d.renderer.utils import TensorProperties
 from pytorch3d.structures import Meshes
 
-from meshmind.models.nn.checkpoint import checkpoint
+from ..models.nn.checkpoint import checkpoint
 
 from .blender.constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR, UNIFORM_LIGHT_DIRECTION
 from .torch_mesh import TorchMesh
@@ -231,11 +231,6 @@ def blender_uniform_lights(
 
 
 class BidirectionalLights(DirectionalLights):
-    """
-    Adapted from here, but effectively shines the light in both positive and negative directions:
-    https://github.com/facebookresearch/pytorch3d/blob/efea540bbcab56fccde6f4bc729d640a403dac56/pytorch3d/renderer/lighting.py#L159
-    """
-
     def diffuse(self, normals, points=None) -> torch.Tensor:
         return torch.maximum(
             super().diffuse(normals, points=points), super().diffuse(-normals, points=points)

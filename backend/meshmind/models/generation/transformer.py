@@ -4,7 +4,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 import torch
 import torch.nn as nn
 
-from meshmind.models.nn.checkpoint import checkpoint
+from ...models.nn.checkpoint import checkpoint
 
 from .pretrained_clip import FrozenImageCLIP, ImageCLIP, ImageType
 from .util import timestep_embedding

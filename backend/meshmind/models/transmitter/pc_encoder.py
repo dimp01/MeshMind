@@ -8,11 +8,11 @@ import torch.nn.functional as F
 from PIL import Image
 from torch import torch
 
-from meshmind.models.generation.perceiver import SimplePerceiver
-from meshmind.models.generation.transformer import Transformer
-from meshmind.models.nn.encoding import PosEmbLinear
-from meshmind.rendering.view_data import ProjectiveCamera
-from meshmind.util.collections import AttrDict
+from ..generation.perceiver import SimplePerceiver
+from ..generation.transformer import Transformer
+from ..nn.encoding import PosEmbLinear
+from ...rendering.view_data import ProjectiveCamera
+from ...util.collections import AttrDict
 
 from .base import VectorEncoder
 from .channels_encoder import DatasetIterator, sample_pcl_fps

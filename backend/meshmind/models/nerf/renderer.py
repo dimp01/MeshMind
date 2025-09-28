@@ -3,10 +3,10 @@ from typing import Any, Dict, Optional
 
 import torch
 
-from meshmind.models.nn.meta import subdict
-from meshmind.models.renderer import RayRenderer
-from meshmind.models.volume import Volume
-from meshmind.util.collections import AttrDict
+from ...models.nn.meta import subdict
+from ...models.renderer import RayRenderer
+from ...models.volume import Volume
+from ...util.collections import AttrDict
 
 from .model import NeRFModel
 from .ray import RayVolumeIntegral, StratifiedRaySampler, render_rays

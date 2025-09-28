@@ -2,12 +2,12 @@ from typing import Optional, Sequence
 
 import torch
 
-from meshmind.rendering.blender.constants import (
+from ..blender.constants import (
     BASIC_AMBIENT_COLOR,
     BASIC_DIFFUSE_COLOR,
     UNIFORM_LIGHT_DIRECTION,
 )
-from meshmind.rendering.view_data import ProjectiveCamera
+from ..view_data import ProjectiveCamera
 
 from .cast import cast_camera
 from .types import RayCollisions, TriMesh

@@ -6,9 +6,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
 
-from meshmind.models.generation.transformer import Transformer
-from meshmind.rendering.view_data import ProjectiveCamera
-from meshmind.util.collections import AttrDict
+from ...models.generation.transformer import Transformer
+from ...rendering.view_data import ProjectiveCamera
+from ...util.collections import AttrDict
 
 from .base import VectorEncoder
 

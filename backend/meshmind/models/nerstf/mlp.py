@@ -2,10 +2,10 @@ from typing import Any, Dict, Optional, Tuple
 
 import torch
 
-from meshmind.models.nn.ops import get_act
-from meshmind.models.query import Query
-from meshmind.models.stf.mlp import MLPModel
-from meshmind.util.collections import AttrDict
+from ...models.nn.ops import get_act
+from ...models.query import Query
+from ...models.stf.mlp import MLPModel
+from ...util.collections import AttrDict
 
 
 class MLPDensitySDFModel(MLPModel):

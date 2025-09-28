@@ -10,18 +10,18 @@ import torch.nn.functional as F
 from PIL import Image
 from torch import torch
 
-from meshmind.models.generation.perceiver import SimplePerceiver
-from meshmind.models.generation.transformer import Transformer
-from meshmind.models.nn.camera import DifferentiableProjectiveCamera
-from meshmind.models.nn.encoding import (
+from ...models.generation.perceiver import SimplePerceiver
+from ...models.generation.transformer import Transformer
+from ...models.nn.camera import DifferentiableProjectiveCamera
+from ...models.nn.encoding import (
     MultiviewPointCloudEmbedding,
     MultiviewPoseEmbedding,
     PosEmbLinear,
 )
-from meshmind.models.nn.ops import PointSetEmbedding
-from meshmind.rendering.point_cloud import PointCloud
-from meshmind.rendering.view_data import ProjectiveCamera
-from meshmind.util.collections import AttrDict
+from ...models.nn.ops import PointSetEmbedding
+from ...rendering.point_cloud import PointCloud
+from ...rendering.view_data import ProjectiveCamera
+from ...util.collections import AttrDict
 
 from .base import ChannelsEncoder
 

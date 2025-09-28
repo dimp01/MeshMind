@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 from PIL import Image
 
-from meshmind.models.download import default_cache_dir
+from ...models.download import default_cache_dir
 
 ImageType = Union[np.ndarray, torch.Tensor, Image.Image]
 

@@ -7,17 +7,17 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from meshmind.models.nn.camera import DifferentiableCamera, DifferentiableProjectiveCamera
-from meshmind.models.nn.meta import subdict
-from meshmind.models.nn.utils import to_torch
-from meshmind.models.query import Query
-from meshmind.models.renderer import Renderer, get_camera_from_batch
-from meshmind.models.volume import BoundingBoxVolume, Volume
-from meshmind.rendering.blender.constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR
-from meshmind.rendering.mc import marching_cubes
-from meshmind.rendering.torch_mesh import TorchMesh
-from meshmind.rendering.view_data import ProjectiveCamera
-from meshmind.util.collections import AttrDict
+from ...models.nn.camera import DifferentiableCamera, DifferentiableProjectiveCamera
+from ...models.nn.meta import subdict
+from ...models.nn.utils import to_torch
+from ...models.query import Query
+from ...models.renderer import Renderer, get_camera_from_batch
+from ...models.volume import BoundingBoxVolume, Volume
+from ...rendering.blender.constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR
+from ...rendering.mc import marching_cubes
+from ...rendering.torch_mesh import TorchMesh
+from ...rendering.view_data import ProjectiveCamera
+from ...util.collections import AttrDict
 
 from .base import Model
 
@@ -328,7 +328,7 @@ def _render_with_pytorch3d(
     _ = tf_out
 
     # Lazy import because pytorch3d is installed lazily.
-    from meshmind.rendering.pytorch3d_util import (
+    from ...rendering.pytorch3d_util import (
         blender_uniform_lights,
         convert_cameras_torch,
         convert_meshes,
@@ -399,8 +399,8 @@ def _render_with_raycast(
 ):
     assert np.mean(np.array(specular_color)) == 0
 
-    from meshmind.rendering.raycast.render import render_diffuse_mesh
-    from meshmind.rendering.raycast.types import TriMesh as TorchTriMesh
+    from ...rendering.raycast.render import render_diffuse_mesh
+    from ...rendering.raycast.types import TriMesh as TorchTriMesh
 
     device = camera.origin.device
     device_type = device.type

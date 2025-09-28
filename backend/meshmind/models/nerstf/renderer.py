@@ -3,17 +3,17 @@ from typing import Any, Dict, Optional, Sequence, Tuple, Union
 
 import torch
 
-from meshmind.models.nerf.model import NeRFModel
-from meshmind.models.nerf.ray import RayVolumeIntegral, StratifiedRaySampler, render_rays
-from meshmind.models.nn.meta import subdict
-from meshmind.models.nn.utils import to_torch
-from meshmind.models.query import Query
-from meshmind.models.renderer import RayRenderer, render_views_from_rays
-from meshmind.models.stf.base import Model
-from meshmind.models.stf.renderer import STFRendererBase, render_views_from_stf
-from meshmind.models.volume import BoundingBoxVolume, Volume
-from meshmind.rendering.blender.constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR
-from meshmind.util.collections import AttrDict
+from ...models.nerf.model import NeRFModel
+from ...models.nerf.ray import RayVolumeIntegral, StratifiedRaySampler, render_rays
+from ...models.nn.meta import subdict
+from ...models.nn.utils import to_torch
+from ...models.query import Query
+from ...models.renderer import RayRenderer, render_views_from_rays
+from ...models.stf.base import Model
+from ...models.stf.renderer import STFRendererBase, render_views_from_stf
+from ...models.volume import BoundingBoxVolume, Volume
+from ...rendering.blender.constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR
+from ...util.collections import AttrDict
 
 
 class NeRSTFRenderer(RayRenderer, STFRendererBase):

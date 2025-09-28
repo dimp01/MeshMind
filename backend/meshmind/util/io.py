@@ -5,7 +5,7 @@ from typing import Any, BinaryIO, Iterator, Union
 import blobfile as bf
 import yaml
 
-from meshmind.util.collections import AttrDict
+from ..util.collections import AttrDict
 
 
 def read_config(path_or_file: Union[str, io.IOBase]) -> Any:

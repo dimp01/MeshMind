@@ -4,8 +4,8 @@ from typing import Any, Dict, Optional, Tuple
 import torch.nn as nn
 from torch import torch
 
-from meshmind.models.renderer import Renderer
-from meshmind.util.collections import AttrDict
+from ...models.renderer import Renderer
+from ...util.collections import AttrDict
 
 from .bottleneck import latent_bottleneck_from_config, latent_warp_from_config
 from .params_proj import flatten_param_shapes, params_proj_from_config

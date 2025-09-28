@@ -6,7 +6,7 @@ from typing import BinaryIO, Dict, List, Optional, Union
 import blobfile as bf
 import numpy as np
 
-from meshmind.rendering.view_data import ViewData
+from ..rendering.view_data import ViewData
 
 from .ply_util import write_ply
 

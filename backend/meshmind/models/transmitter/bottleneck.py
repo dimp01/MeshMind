@@ -5,8 +5,8 @@ import numpy as np
 import torch.nn as nn
 from torch import torch
 
-from meshmind.diffusion.gaussian_diffusion import diffusion_from_config
-from meshmind.util.collections import AttrDict
+from ...diffusion.gaussian_diffusion import diffusion_from_config
+from ...util.collections import AttrDict
 
 
 class LatentBottleneck(nn.Module, ABC):

@@ -8,7 +8,7 @@ import blobfile as bf
 import numpy as np
 from PIL import Image
 
-from meshmind.rendering.mesh import TriMesh
+from ..mesh import TriMesh
 
 from .constants import BASIC_AMBIENT_COLOR, BASIC_DIFFUSE_COLOR, UNIFORM_LIGHT_DIRECTION
 

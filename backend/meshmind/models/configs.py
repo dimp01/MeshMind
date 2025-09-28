@@ -5,34 +5,34 @@ import torch
 import torch.nn as nn
 import yaml
 
-from meshmind.models.generation.latent_diffusion import SplitVectorDiffusion
-from meshmind.models.generation.perceiver import PointDiffusionPerceiver
-from meshmind.models.generation.pooled_mlp import PooledMLP
-from meshmind.models.generation.transformer import (
+from ..models.generation.latent_diffusion import SplitVectorDiffusion
+from ..models.generation.perceiver import PointDiffusionPerceiver
+from ..models.generation.pooled_mlp import PooledMLP
+from ..models.generation.transformer import (
     CLIPImageGridPointDiffusionTransformer,
     CLIPImageGridUpsamplePointDiffusionTransformer,
     CLIPImagePointDiffusionTransformer,
     PointDiffusionTransformer,
     UpsamplePointDiffusionTransformer,
 )
-from meshmind.models.nerf.model import MLPNeRFModel, VoidNeRFModel
-from meshmind.models.nerf.renderer import OneStepNeRFRenderer, TwoStepNeRFRenderer
-from meshmind.models.nerstf.mlp import MLPDensitySDFModel, MLPNeRSTFModel
-from meshmind.models.nerstf.renderer import NeRSTFRenderer
-from meshmind.models.nn.meta import batch_meta_state_dict
-from meshmind.models.stf.mlp import MLPSDFModel, MLPTextureFieldModel
-from meshmind.models.stf.renderer import STFRenderer
-from meshmind.models.transmitter.base import ChannelsDecoder, Transmitter, VectorDecoder
-from meshmind.models.transmitter.channels_encoder import (
+from ..models.nerf.model import MLPNeRFModel, VoidNeRFModel
+from ..models.nerf.renderer import OneStepNeRFRenderer, TwoStepNeRFRenderer
+from ..models.nerstf.mlp import MLPDensitySDFModel, MLPNeRSTFModel
+from ..models.nerstf.renderer import NeRSTFRenderer
+from ..models.nn.meta import batch_meta_state_dict
+from ..models.stf.mlp import MLPSDFModel, MLPTextureFieldModel
+from ..models.stf.renderer import STFRenderer
+from ..models.transmitter.base import ChannelsDecoder, Transmitter, VectorDecoder
+from ..models.transmitter.channels_encoder import (
     PointCloudPerceiverChannelsEncoder,
     PointCloudTransformerChannelsEncoder,
 )
-from meshmind.models.transmitter.multiview_encoder import MultiviewTransformerEncoder
-from meshmind.models.transmitter.pc_encoder import (
+from ..models.transmitter.multiview_encoder import MultiviewTransformerEncoder
+from ..models.transmitter.pc_encoder import (
     PointCloudPerceiverEncoder,
     PointCloudTransformerEncoder,
 )
-from meshmind.models.volume import BoundingBoxVolume, SphericalVolume, UnboundedVolume
+from ..models.volume import BoundingBoxVolume, SphericalVolume, UnboundedVolume
 
 
 def model_from_config(config: Union[str, Dict[str, Any]], device: torch.device) -> nn.Module:

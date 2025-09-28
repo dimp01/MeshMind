@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from meshmind.util.collections import AttrDict
+from ...util.collections import AttrDict
 
 from .meta import MetaModule, subdict
 from .pointnet2_utils import sample_and_group, sample_and_group_all
