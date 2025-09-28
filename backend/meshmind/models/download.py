@@ -32,7 +32,7 @@ URL_HASHES = {
     "https://drive.google.com/uc?export=download&id=1wH1nGRSsmg8U72RaPXAtS4Fl-IVbnYcL": "ffe1bcb405104a37d9408391182ab118a4ef313c391e07689684f1f62071605e",
     "https://openaipublic.azureedge.net/main/shap-e/vector_decoder_config.yaml": "e6d373649f8e24d85925f4674b9ac41c57aba5f60e42cde6d10f87381326365c",
     "https://drive.google.com/uc?export=download&id=1i3lTsjazz9IkE9Jb7NH8WsiIMFCpzKyU": "f290beeea3d3e9ff15db01bde5382b6e549e463060c0744f89c049505be246c1",
-    "https://drive.google.com/uc?export=download&id=15alU5pN1OYEVL59s8SYT0TXVaZvlzpVR": "4e0745605a533c543c72add803a78d233e2a6401e0abfa0cad58afb4d74ad0b0",
+    "https://drive.google.com/uc?export=download&id=15alU5pN1OYEVL59s8SYT0TXVaZvlzpVR": "a09d80abe0f5c68d5892ae1d9fbc5b548f003f6cf6ce3a7b0a703e6c49121b9d",
     "https://drive.google.com/uc?export=download&id=1d8MU3eTM9MHTrbabJ3l-qzJyZzwR5ztL": "efcb2cd7ee545b2d27223979d41857802448143990572a42645cd09c2942ed57",
 }
 
@@ -55,12 +55,14 @@ def fetch_file_cached(
     if cache_dir is None:
         cache_dir = default_cache_dir()
     os.makedirs(cache_dir, exist_ok=True)
-    local_path = os.path.join(cache_dir, url.split("/")[-1])
+    # local_path = os.path.join(cache_dir, url.split("/")[-1])
+    local_path = os.path.join(cache_dir, expected_hash)
     if os.path.exists(local_path):
         check_hash(local_path, expected_hash)
         return local_path
 
     response = requests.get(url, stream=True)
+    response.raise_for_status()
     size = int(response.headers.get("content-length", "0"))
     with FileLock(local_path + ".lock"):
         if progress:
