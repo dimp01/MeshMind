@@ -56,6 +56,7 @@ with viewer_tab:
         torch.cuda.manual_seed_all(seed)
         np.random.seed(seed)
         random.seed(seed)
+        st.empty()
         
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
