@@ -107,7 +107,7 @@ with viewer_tab:
                     format = controls["format"]
                     file_name = gen_file_name(prompt, format)
                     file_path = safe_join(output_dir, file_name)
-                    save_mesh_as(decoder_output, file_path, format)
+                    save_mesh_as(decoder_output, file_path)
     
                     status.update(
                         label="✅ Generation complete!", state="complete", expanded=False
@@ -118,6 +118,7 @@ with viewer_tab:
                         {
                             "prompt": prompt,
                             "file_path": file_path,
+                            "format": format,
                             "timestamp": datetime.now().strftime("%I:%M:%S %p"),
                         }
                     )

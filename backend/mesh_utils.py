@@ -1,7 +1,7 @@
-from diffusers.utils import export_to_obj
-from trimesh.exchange.export import export_mesh
 import numpy as np
 import trimesh
+import pymeshfix
+
 
 def build_trimesh(decoder_output):
     """
@@ -24,19 +24,48 @@ def build_trimesh(decoder_output):
 
     return trimesh.Trimesh(vertices=verts_np, faces=faces_np.astype(np.int64), process=False)
 
-def save_mesh_as(decoder_output, file_path, format):
+def save_mesh_as(decoder_output, file_path):
     """
     Saves a Shap-E MeshDecoderOutput to .obj file.
     """
-    if format == "obj":
-        export_to_obj(decoder_output, file_path)
-    else:
-        mesh = build_trimesh(decoder_output)
-        # if format.lower() in ['glb', 'gltf']:
-        #     if not hasattr(mesh, 'metadata'):
-        #         mesh.metadata = {}
-        #     mesh = trimesh.Scene(mesh)
-        with open(file_path, "wb") as f:
-            # export_mesh(mesh, f, file_type=format)
-            mesh.export(f, file_type=format)
+    mesh = build_trimesh(decoder_output)
+    repair_mesh(mesh, file_path)
     return file_path
+
+
+def repair_mesh(mesh, output_path, verbose=True):
+    """
+    Repair a mesh using PyMeshFix.
+    - Fills holes
+    - Fixes non-manifold edges
+    - Outputs repaired mesh as OBJ (default) or same as input extension
+    
+    Args:
+        input_path (str): Path to input mesh (.obj, .stl, etc.)
+        output_path (str): Path to save repaired mesh. Defaults to input_path + '_repaired.obj'
+        verbose (bool): Print stats before and after
+    """
+    if mesh.is_empty:
+        raise ValueError("Mesh is empty or invalid.")
+
+    if verbose:
+        print(f"Loaded mesh: {len(mesh.vertices)} vertices, {len(mesh.faces)} faces")
+    
+    # Extract vertices and faces
+    vertices = mesh.vertices
+    faces = mesh.faces
+
+    # Repair using PyMeshFix
+    meshfix = pymeshfix.MeshFix(vertices, faces)
+    meshfix.repair(verbose=verbose)  # fixes holes, non-manifold edges
+
+    # Reconstruct repaired mesh
+    repaired_mesh = trimesh.Trimesh(vertices=meshfix.v, faces=meshfix.f, process=False)
+
+    if verbose:
+        print(f"Repaired mesh: {len(repaired_mesh.vertices)} vertices, {len(repaired_mesh.faces)} faces")
+
+    # Save repaired mesh
+    repaired_mesh.export(output_path)
+    if verbose:
+        print(f"Saved repaired mesh to: {output_path}")
