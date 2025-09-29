@@ -20,9 +20,10 @@ def text_model_prompt(product_name, dimensions, features, materials, style, inte
 
     prompt = f"""
     You are a prompt expert.
-    Generate ONLY the prompt for Shap-E by improving this prompt.
+    Generate ONLY the short prompt for Shap-E by improving this prompt.
     \"{message}\"
     Don't give any text except the prompt.
+    Start with "3d model of .."
     """
     try:
         model = genai.GenerativeModel("gemini-2.5-flash")
@@ -43,14 +44,14 @@ def diffusion_model_prompt(product_name, dimensions, style, colors, features):
 
     prompt = f"""
     You are a prompt expert.
-    Generate ONLY the prompt for Image generation of a product by using this info.
+    Generate ONLY the short prompt for Image generation of a product by using this info.
 
     - Model: runway/stable-diffusion
     - Product: {product_name}
-    - Dimension: {dimensions}
     - Style/Design: {style}
     - Colors: {colors}
     - Important features: {features_text}
+    - Background: blurred or white
 
     The image should be photorealistic, clean, and symmetrical, suitable for presentation or marketing.
     Avoid cartoonish, low-resolution, or distorted elements.
