@@ -48,14 +48,13 @@ with viewer_tab:
     download_panel = st.empty()
 
     if controls["generate_button"]:
-        if controls["seed"] == "random":
-            seed = int(time.time()) % (2**32 - 1)
-        else:
-            seed = controls["seed"]
+        seed = controls["seed"]
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
         np.random.seed(seed)
         random.seed(seed)
+
+        print(f"Using seed: {seed}")
         
         # Build prompt using Gemini
         with st.status("✨ Evaluating your request....", expanded=True) as status:
