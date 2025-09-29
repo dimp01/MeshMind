@@ -25,7 +25,7 @@ def load_diffusion_pipeline(device=device):
     else:
         print(f"❌ Model not found at: {SAVE_PATH}. Downloading model....")
         pipe = StableDiffusionPipeline.from_pretrained(
-            "runwayml/stable-diffusion-v1-5", 
+            "sd-legacy/stable-diffusion-v1-5", 
             torch_dtype=torch.float16
         ).to(device)
         os.makedirs(SAVE_PATH, exist_ok=True)
