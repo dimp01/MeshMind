@@ -86,9 +86,8 @@ def sidebar_controls():
 
         # Deep features
         with st.expander("⚙️ Deep Features"):
-            randomize_seed = st.checkbox("Randomize Seed", value=True,
-                                         help="Controls randomness. Save the seed to recreate results; change it for variations."
-                                        )
+            randomize_seed = st.checkbox("Randomize Seed", value=True)
+            #help="Controls randomness. Save the seed to recreate results; change it for variations."
             if randomize_seed:
                seeding = st.slider(
                  "Random Seeding",
