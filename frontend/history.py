@@ -17,13 +17,18 @@ def show_history(viewer_panel, download_panel):
     else:
         for i, item in enumerate(reversed(st.session_state.history)):
             st.markdown("---") if i!=0 else 0
-            col1, col2, col3 = st.columns([1, 2, 1])
+            col1, col2, col3 = st.columns([1, 3, 1])
             
             with col1:
                 reloaded_trimesh = trimesh.load(item["file_path"])
                 pv_mesh = pv.wrap(reloaded_trimesh)
-                plotter = pv.Plotter(off_screen=True, window_size=[150, 120])
-                plotter.add_mesh(pv_mesh, show_edges=True)
+                plotter = pv.Plotter(off_screen=True, window_size=[200, 120])
+                plotter.add_mesh(
+                    pv_mesh,
+                    scalars=reloaded_trimesh.visual.vertex_colors[:, :3],
+                    rgb=True,
+                    show_edges=False
+                )
                 plotter.view_isometric()
                 plotter.background_color = "black"
                 img_array = plotter.screenshot(return_img=True)
