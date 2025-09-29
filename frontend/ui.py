@@ -95,6 +95,7 @@ def sidebar_controls():
                  value=random.randint(1, 2**32 - 1),
                  step=1,
                  label_visibility="collapsed",
+                 disabled=True
                )
             else:
                seeding = st.slider(
@@ -102,7 +103,7 @@ def sidebar_controls():
                  min_value=1, max_value=2**32 - 1,  # A standard range for seeds
                  value=1758743251,
                  step=1,
-                 label_visibility="collapsed",
+                 label_visibility="collapsed"
                )
 
             
