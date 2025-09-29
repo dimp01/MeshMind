@@ -1,4 +1,5 @@
 import streamlit as st
+import random
 
 
 def sidebar_controls():
