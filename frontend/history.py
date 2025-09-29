@@ -22,7 +22,7 @@ def show_history(viewer_panel, download_panel):
             with col1:
                 reloaded_trimesh = trimesh.load(item["file_path"])
                 pv_mesh = pv.wrap(reloaded_trimesh)
-                plotter = pv.Plotter(off_screen=True, window_size=[120, 180])
+                plotter = pv.Plotter(off_screen=True, window_size=[150, 150])
                 plotter.add_mesh(
                     pv_mesh,
                     scalars=reloaded_trimesh.visual.vertex_colors[:, :3],
