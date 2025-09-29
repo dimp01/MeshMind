@@ -5,7 +5,7 @@ from backend.config import device
 import torch
 
 image_model, text_model, xm, diffusion = get_models(device)
-# diffusion_p = load_diffusion_pipeline(device)
+diffusion_p = load_diffusion_pipeline(device)
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
