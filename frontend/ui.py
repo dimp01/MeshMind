@@ -12,7 +12,7 @@ def sidebar_controls():
         section[data-testid="stSidebar"] {
             min-width: 20% !important;
             max-width: 50% !important;
-            width: 25% !important
+            width: 30% !important
         }
     
         [data-testid="stSidebarUserContent"] {
