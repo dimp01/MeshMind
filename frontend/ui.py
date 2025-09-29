@@ -22,6 +22,26 @@ def sidebar_controls():
             border: none;
             padding: .5rem .5rem 0 .5rem;
         }
+
+        @media (max-width: 768px) {
+         section[data-testid="stSidebar"] {
+           width: 60% !important;  /* sidebar wider on mobile */
+           min-width: 60% !important;
+           max-width: 80% !important;
+          }
+
+         [data-testid="stForm"] {
+           padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+         }
+        }
+
+        @media (max-width: 480px) {
+          section[data-testid="stSidebar"] {
+            width: 80% !important;  /* almost full screen */
+            min-width: 80% !important;
+            max-width: 95% !important;
+          }
+        }
     </style>
     """, unsafe_allow_html=True)
     
