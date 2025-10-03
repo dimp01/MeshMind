@@ -22,8 +22,8 @@ pyngrok==7.3.0  # pinned to avoid conflict with >=7.0.0
 google-generativeai>=0.3.2
 
 # Rendering
-pyopengl-headless==0.1.4
-pyglet==1.5.31
+#pyopengl-headless==0.1.4
+#pyglet==1.5.31
 
 # Utilities
 filelock
