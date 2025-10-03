@@ -7,9 +7,9 @@ from PIL import Image
 
 
 class DiffusionModel:
-    def __init__(self, image_model, diffusion, xm):
+    def __init__(self, model, diffusion, xm):
         # Convert bytes to PIL Image
-        self.image_model = image_model
+        self.model = model
         self.diffusion = diffusion
         self.xm = xm
 
@@ -53,7 +53,7 @@ class DiffusionModel:
         # Generate latent 3D representation
         latents = sample_latents(
             batch_size=1,
-            model=self.image_model,
+            model=self.model,
             diffusion=self.diffusion,
             guidance_scale=guidance_scale,
             model_kwargs=model_kwargs,

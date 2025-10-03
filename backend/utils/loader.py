@@ -35,8 +35,8 @@ def load_diffusion_pipeline(device=device):
 
 @st.cache_resource
 def get_models(device):
-    image_model = load_model("image300M", device=device)
-    text_model = load_model("text300M", device=device)
+    d_model = load_model("d_model", device=device)
+    text_model = load_model("text_model", device=device)
     xm = load_model("transmitter", device=device)
     diffusion = diffusion_from_config(load_config("diffusion"))
-    return image_model, text_model, xm, diffusion
+    return d_model, text_model, xm, diffusion

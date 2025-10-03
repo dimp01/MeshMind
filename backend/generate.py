@@ -4,8 +4,8 @@ from backend.utils.diffuser import DiffusionModel
 from backend.config import device
 import torch
 
-image_model, text_model, xm, diffusion = get_models(device)
-# diffusion_p = load_diffusion_pipeline(device)
+d_model, text_model, xm, diffusion = get_models(device)
+diffusion_p = load_diffusion_pipeline(device)
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
@@ -40,7 +40,7 @@ class GenerateModel:
         return latents
 
     def diffusion(self):
-        diffuser = DiffusionModel(image_model, diffusion, xm)
+        diffuser = DiffusionModel(d_model, diffusion, xm)
         image = diffuser.gen_image(self.prompt, diffusion_p)
         latents = diffuser.generate(
             guidance_scale=self.guidance_scale,
